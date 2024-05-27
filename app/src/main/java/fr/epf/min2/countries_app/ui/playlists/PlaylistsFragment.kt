@@ -1,4 +1,4 @@
-package fr.epf.min2.countries_app.ui.dashboard
+package fr.epf.min2.countries_app.ui.playlists
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import fr.epf.min2.countries_app.databinding.FragmentDashboardBinding
+import fr.epf.min2.countries_app.databinding.FragmentPlaylistsBinding
 
-class DashboardFragment : Fragment() {
+class PlaylistsFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentPlaylistsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val playlistsViewModel =
+            ViewModelProvider(this).get(PlaylistsViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentPlaylistsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textPlaylists
+        playlistsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

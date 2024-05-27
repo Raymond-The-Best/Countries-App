@@ -1,13 +1,13 @@
-package fr.epf.min2.countries_app.ui.dashboard
+package fr.epf.min2.countries_app.ui.playlists
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class PlaylistsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is playlists Fragment"
     }
     val text: LiveData<String> = _text
 }

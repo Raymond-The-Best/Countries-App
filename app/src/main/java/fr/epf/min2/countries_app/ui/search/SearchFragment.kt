@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import fr.epf.min2.countries_app.databinding.FragmentSearchBinding
+import fr.epf.min2.countries_app.save.SharedPrefManager
 
 class SearchFragment : Fragment() {
 
@@ -28,10 +30,22 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSearch
-        searchViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val sharedPrefManager = SharedPrefManager(requireContext())
+
+        binding.searchBarComponent.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    sharedPrefManager.saveSearchQuery(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Handle text changes here if needed
+                return true
+            }
+        })
+
         return root
     }
 

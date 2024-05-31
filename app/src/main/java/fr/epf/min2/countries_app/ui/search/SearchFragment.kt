@@ -43,6 +43,7 @@ class SearchFragment : Fragment() {
                     searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
                         // Utiliser l'objet countries pour afficher les résultats
                     })*/
+
                 }
                 return true
             }

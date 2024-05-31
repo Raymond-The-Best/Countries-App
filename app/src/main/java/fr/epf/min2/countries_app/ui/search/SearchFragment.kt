@@ -39,10 +39,10 @@ class SearchFragment : Fragment() {
         binding.searchBarComponent.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
-                    sharedPrefManager.saveSearchQuery(query)
+                    /*sharedPrefManager.saveSearchQuery(query)
                     searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
                         // Utiliser l'objet countries pour afficher les résultats
-                    })
+                    })*/
                 }
                 return true
             }
@@ -62,9 +62,9 @@ class SearchFragment : Fragment() {
     }
 
     fun  getAllCountries(searchViewModel : SearchViewModel) {
-         searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
+         /*searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
              countriesList = countries
-        })
+        })*/
 
     }
 }

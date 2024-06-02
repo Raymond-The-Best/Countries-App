@@ -36,6 +36,7 @@
         android:id="@+id/DescMapPays"
         android:layout_width="401dp"
         android:layout_height="252dp"
+        app:guidelineUseRtl="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"

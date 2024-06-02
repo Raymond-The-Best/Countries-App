@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nomPlaylistVerti"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="20dp"
+        android:padding="1dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="95dp"
+        tools:text="NOM PLAYLIST" />
+
+    <TextView
+        android:id="@+id/descPlaylistVerti"
+        android:layout_width="252dp"
+        android:layout_height="16dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="59dp" />
+
+
+    <ImageView
+        android:id="@+id/ImagePlaylistVerti"
+        android:layout_width="67dp"
+        android:layout_height="71dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/DeletePlaylistVerti"
+        android:layout_width="33dp"
+        android:layout_height="39dp"
+        android:backgroundTint="@color/transparent"
+        app:srcCompat="@drawable/supprimer"
+        tools:layout_editor_absoluteX="353dp"
+        tools:layout_editor_absoluteY="59dp" />
+
+    <ImageButton
+        android:id="@+id/addPlaylistVerti"
+        android:layout_width="33dp"
+        android:layout_height="41dp"
+        android:backgroundTint="@color/transparent"
+        app:srcCompat="@drawable/add_playlist"
+        tools:layout_editor_absoluteX="353dp"
+        tools:layout_editor_absoluteY="13dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

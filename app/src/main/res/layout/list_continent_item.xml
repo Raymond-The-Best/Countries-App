@@ -29,15 +29,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listResultContinent"
-        android:layout_width="0dp"
-        android:layout_height="194dp"
+        android:layout_width="387dp"
+        android:layout_height="175dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomPlaylistVerti" />
+        app:layout_constraintTop_toBottomOf="@+id/nomPlaylistVerti"
+        tools:listitem="@layout/list_horizontale_pays" />
 
     <TextView
         android:id="@+id/nomPlaylistVerti"

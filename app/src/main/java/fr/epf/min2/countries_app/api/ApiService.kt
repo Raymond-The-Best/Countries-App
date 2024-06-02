@@ -5,14 +5,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 import fr.epf.min2.countries_app.api.ApiClient
 class ApiService {
 
-    // Create a Retrofit instance
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://restcountries.eu/rest/v2/") // Replace with your API base URL
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    companion object {
+        private val retrofit = Retrofit.Builder()
+            .baseUrl("https://your-api-url.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service: ApiClient by lazy { retrofit!!.create(ApiClient::class.java) }
 
-    // Create an implementation of the ApiClient interface
-    val apiClient: ApiClient = retrofit.create(ApiClient::class.java)
+        fun getByRegion(region: String) = service.getCountriesByRegion(region)
+        fun getByName(name: String) = service.getCountryByName(name)
+        fun getAll() = service.getAllCountries()
 
-    
+    }
+
+
 }

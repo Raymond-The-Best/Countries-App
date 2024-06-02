@@ -11,6 +11,7 @@
         android:layout_height="44dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="88dp"
+        android:backgroundTint="@color/transparent"
         android:contentDescription="@string/sortButtonComponent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,13 +21,14 @@
         android:id="@+id/nb_hab"
         android:layout_width="44dp"
         android:layout_height="44dp"
+        android:backgroundTint="@color/transparent"
         app:srcCompat="@android:drawable/checkbox_off_background"
         tools:layout_editor_absoluteX="343dp"
         tools:layout_editor_absoluteY="8dp"
         tools:srcCompat="@drawable/baseline_account_box_24" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listResult"
+        android:id="@+id/listResultContinent"
         android:layout_width="0dp"
         android:layout_height="194dp"
         android:layout_marginStart="8dp"

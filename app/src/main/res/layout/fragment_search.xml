@@ -6,8 +6,17 @@
     android:layout_height="wrap_content"
     tools:context=".ui.search.SearchFragment">
 
+    <SearchView
+        android:id="@+id/searchBarComponent"
+        android:layout_width="302dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/listResultSearch"
         android:layout_width="match_parent"
         android:layout_height="670dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,25 +24,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBarComponent"
         tools:itemCount="80"
-        tools:listitem="@layout/list_verticale_pays" />
+        tools:listitem="@layout/list_verticale_pays" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <ImageButton
-        android:id="@+id/AtoZandZtoA"
-        android:layout_width="wrap_content"
+        android:id="@+id/AtoZSearch"
+        android:layout_width="53dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="2dp"
-        android:contentDescription="@string/sortButtonComponent"
-        android:src="@android:drawable/ic_menu_sort_by_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/baseline_sort_by_alpha_24"
+        tools:layout_editor_absoluteX="305dp"
+        tools:layout_editor_absoluteY="5dp" />
 
-    <SearchView
-        android:id="@+id/searchBarComponent"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/filtreContinentSearch"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/transparent"
+        android:src="@mipmap/ic_launcher_round"
+        tools:layout_editor_absoluteX="363dp"
+        tools:layout_editor_absoluteY="5dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

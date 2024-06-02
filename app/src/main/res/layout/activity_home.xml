@@ -7,7 +7,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/listResultSearch"
         android:layout_width="415dp"
         android:layout_height="637dp"
         android:layout_marginBottom="16dp"

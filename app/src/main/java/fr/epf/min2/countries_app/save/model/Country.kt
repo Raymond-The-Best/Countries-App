@@ -74,6 +74,6 @@ data class Translation(
 
 fun List<Country>.toCountryString(): String {
     return this.joinToString(separator = ", ") { country ->
-        "Country Name: ${country.translations["fra"]?.common}, Region: ${country.region}, Subregion: ${country.subregion}"
+        "Country Name: ${country.name.common}, translations: ${country.translations["fra"]?.common}, Region: ${country.region}"
     }
 }

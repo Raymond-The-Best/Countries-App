@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
+/*
 class adaptaterHoriCountryView(private val dataList: List<paysSelonContinent>) : RecyclerView.Adapter<adaptaterHoriCountryView.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,3 +30,4 @@ class adaptaterHoriCountryView(private val dataList: List<paysSelonContinent>) :
 
 //data class paysSelonContinent(val imageResId: Int, val text: String)
 
+*/

@@ -6,7 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Playlist
-class playlistadapter (private val playlists: List<Playlist>) : RecyclerView.Adapter<playlistadapter.PlaylistViewHolder>() {
+
+
+class PlaylistAdapter (private val playlists: List<Playlist>) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
 
     class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nomPlaylistVerti: TextView = view.findViewById(R.id.nomPlaylistVerti)

@@ -1,16 +1,19 @@
 package fr.epf.min2.countries_app.ui.search
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.databinding.FragmentSearchBinding
 import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
+import fr.epf.min2.countries_app.ui.adapter.CountryAdapter
 import retrofit2.Call
 
 class SearchFragment : Fragment() {
@@ -56,6 +59,15 @@ class SearchFragment : Fragment() {
             }
         })
 
+        // Generate a list of 20 Country objects
+        countriesList = Country.generate(20)
+        // Initialize RecyclerView
+        val recyclerView = binding.listResultSearch
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        // Initialize CountryAdapter
+        val adapter = CountryAdapter(countriesList)
+        recyclerView.adapter = adapter
         return root
     }
 

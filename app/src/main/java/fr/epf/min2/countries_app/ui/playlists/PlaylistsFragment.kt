@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import fr.epf.min2.countries_app.databinding.FragmentPlaylistsBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.save.model.Playlist
-import fr.epf.min2.countries_app.ui.adapter.playlistadapter
+import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapter
 import java.util.Date
 
 class PlaylistsFragment : Fragment() {
@@ -58,7 +56,7 @@ class PlaylistsFragment : Fragment() {
             Playlist("Playlist 5", Date(), listOf<Country>(), false, true)
         ) // Replace this with your actual data
         binding.affichPlaylist.layoutManager = LinearLayoutManager(context)
-        binding.affichPlaylist.adapter = playlistadapter(myDataset)
+        binding.affichPlaylist.adapter = PlaylistAdapter(myDataset)
     }
 
     override fun onDestroyView() {

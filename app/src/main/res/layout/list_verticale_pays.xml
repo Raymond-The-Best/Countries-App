@@ -29,7 +29,7 @@
         android:layout_height="79dp"
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="16dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/fr" />
 
 
     <ImageButton

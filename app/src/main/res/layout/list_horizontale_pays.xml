@@ -13,7 +13,7 @@
         android:layout_height="113dp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="7dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/fr" />
 
     <ImageButton
         android:id="@+id/buttonFavHori"

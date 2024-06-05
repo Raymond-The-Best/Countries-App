@@ -8,6 +8,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import fr.epf.min2.countries_app.databinding.FragmentPlaylistsBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import fr.epf.min2.countries_app.save.model.Country
+import fr.epf.min2.countries_app.save.model.Playlist
+import fr.epf.min2.countries_app.ui.adapter.playlistadapter
+import java.util.Date
 
 class PlaylistsFragment : Fragment() {
 
@@ -45,6 +50,15 @@ class PlaylistsFragment : Fragment() {
         // For example:
         // binding.recyclerView.layoutManager = LinearLayoutManager(context)
         // binding.recyclerView.adapter = MyAdapter(myDataset)
+        val myDataset = listOf(
+            Playlist("Playlist 1", Date(), listOf<Country>(), false, true),
+            Playlist("Playlist 2", Date(), listOf<Country>(), false, true),
+            Playlist("Playlist 3", Date(), listOf<Country>(), false, true),
+            Playlist("Playlist 4", Date(), listOf<Country>(), false, true),
+            Playlist("Playlist 5", Date(), listOf<Country>(), false, true)
+        ) // Replace this with your actual data
+        binding.affichPlaylist.layoutManager = LinearLayoutManager(context)
+        binding.affichPlaylist.adapter = playlistadapter(myDataset)
     }
 
     override fun onDestroyView() {

@@ -15,24 +15,25 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="95dp"
+        app:layout_constraintStart_toEndOf="@id/ImagePlaylistVerti"
         tools:text="NOM PLAYLIST" />
 
     <TextView
         android:id="@+id/descPlaylistVerti"
         android:layout_width="252dp"
         android:layout_height="16dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="59dp" />
-
+        app:layout_constraintTop_toBottomOf="@id/nomPlaylistVerti"
+        app:layout_constraintStart_toEndOf="@id/ImagePlaylistVerti"
+        android:text="TextView" />
 
     <ImageView
         android:id="@+id/ImagePlaylistVerti"
         android:layout_width="67dp"
         android:layout_height="71dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/ic_launcher_background" />
 
     <ImageButton
@@ -41,8 +42,8 @@
         android:layout_height="39dp"
         android:backgroundTint="@color/transparent"
         app:srcCompat="@drawable/supprimer"
-        tools:layout_editor_absoluteX="353dp"
-        tools:layout_editor_absoluteY="59dp" />
+        app:layout_constraintTop_toBottomOf="@id/addPlaylistVerti"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/addPlaylistVerti"
@@ -50,7 +51,7 @@
         android:layout_height="41dp"
         android:backgroundTint="@color/transparent"
         app:srcCompat="@drawable/add_playlist"
-        tools:layout_editor_absoluteX="353dp"
-        tools:layout_editor_absoluteY="13dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

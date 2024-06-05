@@ -27,7 +27,9 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
+
         val searchViewModel =
             ViewModelProvider(this).get(SearchViewModel::class.java)
 

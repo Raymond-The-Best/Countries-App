@@ -21,7 +21,7 @@ class PlaylistsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View {/*
         val playlistsViewModel =
             ViewModelProvider(this).get(PlaylistsViewModel::class.java)
 
@@ -33,6 +33,18 @@ class PlaylistsFragment : Fragment() {
             textView.text = it
         }
         return root
+    }*/
+        _binding = FragmentPlaylistsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Initialize your RecyclerView and its adapter here
+        // For example:
+        // binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        // binding.recyclerView.adapter = MyAdapter(myDataset)
     }
 
     override fun onDestroyView() {

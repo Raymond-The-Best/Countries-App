@@ -10,9 +10,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import fr.epf.min2.countries_app.api.UpdateSavedData
-import fr.epf.min2.countries_app.dataManipulation.LocalDataLookup
 import fr.epf.min2.countries_app.databinding.ActivityMainBinding
+import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SavedDataLoader
+import fr.epf.min2.countries_app.save.SharedPrefManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         loadDataFromLocal(this)
         UpdateSavedData.updateAllData(this)
+        PlaylistManager.getInstance(SharedPrefManager(this)).createDefaultPlaylists(SavedDataLoader.getInstance())
     }
     private fun loadDataFromLocal(context : Context) {
         // Load the data from the json file

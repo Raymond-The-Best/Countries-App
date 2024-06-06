@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.save.model.Playlist
 
 class SharedPrefManager(context: Context) {
@@ -64,6 +65,20 @@ class SharedPrefManager(context: Context) {
             return gson.fromJson(it, type)
         }
         return null
+    }
+    fun addCountryToPlaylist(name: String, country : Country) {
+        val playlist = getPlaylist(name)
+        playlist?.let {
+            playlist.pays.add(country)
+            savePlaylist(playlist)
+        }
+    }
+    fun removeCountryFromPlaylist(name: String, country: Country) {
+        val playlist = getPlaylist(name)
+        playlist?.let {
+            playlist.pays.remove(country)
+            savePlaylist(playlist)
+        }
     }
     fun removePlaylist(name: String) {
         val editor = sharedPrefPlaylist.edit()

@@ -36,7 +36,7 @@ class SavedDataLoader private constructor(): ViewModel() {
         Log.d(TAG, "Saved ${countries.size} countries to JSON file")
     }
 
-    fun prepareCountriesForUse(countries: List<Country>) : List<Country>{
+    private fun prepareCountriesForUse(countries: List<Country>) : List<Country>{
         // Creation des hashmaps pour la recherche
         val updatedCountries = createDataMaps(countries)
         countriesLiveData.postValue(updatedCountries)

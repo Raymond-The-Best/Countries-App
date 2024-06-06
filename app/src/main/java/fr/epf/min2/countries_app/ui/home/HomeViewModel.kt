@@ -8,8 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fr.epf.min2.countries_app.api.ApiService
-import fr.epf.min2.countries_app.dataManipulation.LocalDataLookup
 import fr.epf.min2.countries_app.save.SavedDataLoader
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.save.model.toCountryString

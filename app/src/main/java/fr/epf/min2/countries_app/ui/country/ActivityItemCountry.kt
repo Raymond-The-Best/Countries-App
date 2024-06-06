@@ -1,19 +1,25 @@
 package fr.epf.min2.countries_app.ui.country
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import fr.epf.min2.countries_app.R
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.Marker
 
 class ActivityItemCountry : AppCompatActivity() {
 
+    private lateinit var mapView: MapView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_country)
 
         val countryName = intent.getStringExtra("COUNTRY_NAME")
         val countryDescription = intent.getStringExtra("COUNTRY_DESCRIPTION")
-        // Récupérez d'autres informations sur le pays si nécessaire
+
         val countryRegion = intent.getStringExtra("COUNTRY_REGION")
         val countryCapital = intent.getStringExtra("COUNTRY_CAPITAL")
         val countrySubregion = intent.getStringExtra("COUNTRY_SUBREGION")
@@ -25,10 +31,14 @@ class ActivityItemCountry : AppCompatActivity() {
         val countryPopulation = intent.getIntExtra("COUNTRY_POPULATION", 0)
         val countryDrivesOn = intent.getStringExtra("COUNTRY_DRIVES_ON")
 
-        // Utilisez les informations du pays pour remplir vos vues
+        val countryFlagUrl = intent.getStringExtra("COUNTRY_FLAG_URL")
+        val countryLat = intent.getDoubleExtra("COUNTRY_LAT", 0.0)
+        val countryLng = intent.getDoubleExtra("COUNTRY_LNG", 0.0)
+
+
         val textViewName = findViewById<TextView>(R.id.NomPays)
         val textViewDescription = findViewById<TextView>(R.id.titreInfos)
-        val textViewRegion = findViewById<TextView>(R.id.infregion)
+        val textViewRegion = findViewById<TextView>(R.id.Continent)
         val textViewCapital = findViewById<TextView>(R.id.Capitale)
         val textViewSubregion = findViewById<TextView>(R.id.infregion)
         val textViewIndependent = findViewById<TextView>(R.id.infidpd)
@@ -51,5 +61,33 @@ class ActivityItemCountry : AppCompatActivity() {
         textViewDemonym.text = countryDemonym
         textViewPopulation.text = countryPopulation.toString()
         textViewDrivesOn.text = countryDrivesOn
+
+        val imageViewFlag = findViewById<ImageView>(R.id.DescDrapeauPays)
+        Glide.with(this).load(countryFlagUrl).into(imageViewFlag)
+
+        mapView = findViewById(R.id.DescMapPays)
+        mapView.setMultiTouchControls(true)
+
+        val mapController = mapView.controller
+        mapController.setZoom(9.5)
+        val startPoint = GeoPoint(countryLat, countryLng)
+        mapController.setCenter(startPoint)
+
+        val startMarker = Marker(mapView)
+        startMarker.position = startPoint
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        mapView.overlays.add(startMarker)
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        mapView.onPause()
+        super.onPause()
+    }
+
 }

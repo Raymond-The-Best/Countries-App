@@ -271,7 +271,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.gms.maps.MapView
+    <org.osmdroid.views.MapView
         android:id="@+id/DescMapPays"
         android:layout_width="396dp"
         android:layout_height="298dp"
@@ -285,5 +285,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollviewpays"
         app:layout_constraintVertical_bias="0.979" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

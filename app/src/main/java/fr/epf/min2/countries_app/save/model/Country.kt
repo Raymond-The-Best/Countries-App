@@ -23,7 +23,34 @@ data class Country(
     @SerializedName("continents") val continents: List<String>,
     @SerializedName("flags") val flags: Flags,
     @SerializedName("capitalInfo") val capitalInfo: CapitalInfo
-) : Parcelable
+) : Parcelable{
+
+    companion object {
+        fun generate(size: Int = 20) =
+            (1..size).map {
+                Country(
+                    Name("Country $it", "Country $it", mapOf("fra" to NativeName("Pays $it", "Pays $it"))),
+                    listOf(".fr"),
+                    true,
+                    true,
+                    mapOf("EUR" to Currency("Euro", "€")),
+                    listOf("Paris"),
+                    listOf("France"),
+                    "Europe",
+                    "Western Europe",
+                    mapOf("fra" to "Français"),
+                    mapOf("fra" to Translation("Pays $it", "Pays $it")),
+                    mapOf("fra" to Demonym("Française", "Français")),
+                    mapOf("fra" to "https://goo.gl/maps/g7QxxSFsWyTPKuzd7"),
+                    1000000,
+                    Car("right"),
+                    listOf("Europe"),
+                    Flags("https://flagcdn.com/w320/fr.png"),
+                    CapitalInfo(listOf(48.8566, 2.3522))
+                )
+            }
+    }
+}
 
 @Parcelize
 data class Name(

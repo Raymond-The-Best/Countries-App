@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="fr.epf.min2.countries_app.ui.home.HomeFragment"
+        android:name="fr.epf.min2.countries_app.ui.home.HomeActivity"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/activity_home" />
 
     <fragment
         android:id="@+id/navigation_search"

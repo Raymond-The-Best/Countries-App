@@ -19,6 +19,7 @@ class UpdateSavedData {
         fun updateAllData(context: Context) {
             var success = false
             var lastCountriesFetch : Date = Date(0)
+            var cptLimit = 0
             do {
                 ApiService.getAll().enqueue(object : Callback<List<Country>> {
                     override fun onResponse(
@@ -42,8 +43,9 @@ class UpdateSavedData {
                         Log.d(TAG, "Last fetch was at $lastCountriesFetch")
                     }
                 })
+                cptLimit++
             }
-            while (!success)
+            while (!success && cptLimit < 5)
         }
     }
 }

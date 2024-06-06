@@ -57,8 +57,8 @@ class SearchFragment : Fragment() {
                 if (query != null) {
                     Log.d(TAG, "Query submitted: $query")
                     searchViewModel.lookUpInputedString(query)
-                    /*sharedPrefManager.saveSearchQuery(query)
-                    searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
+                    sharedPrefManager.saveSearchQuery(query)
+                    /*searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
                         // Utiliser l'objet countries pour afficher les résultats
                     })*/
 
@@ -70,6 +70,7 @@ class SearchFragment : Fragment() {
                 // Handle text changes here if needed
                 Log.d(TAG, "Text changed to $newText")
                 searchViewModel.lookUpInputedString(newText ?: "")
+                sharedPrefManager.getSearchHistory()
                 return true
             }
         })

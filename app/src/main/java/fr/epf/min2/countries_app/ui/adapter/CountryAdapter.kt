@@ -24,7 +24,7 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
                     val intent = Intent(view.context, ActivityItemCountry::class.java)
                     intent.putExtra("COUNTRY_NAME", clickedCountry.name)
                     intent.putExtra("COUNTRY_DESCRIPTION", clickedCountry.region)
-                    intent.putExtra("COUNTRY_FLAG", clickedCountry.flag)
+                    intent.putExtra("COUNTRY_FLAG", clickedCountry.flags.png)
                     // Ajoutez d'autres informations sur le pays si nécessaire
                     view.context.startActivity(intent)
                 }
@@ -39,7 +39,7 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
         val country = countries[position]
-        holder.countryName.text = country.name
+        holder.countryName.text = country.name.common
         // Set other views as needed...
     }
 

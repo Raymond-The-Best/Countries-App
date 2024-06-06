@@ -9,15 +9,15 @@ import java.util.concurrent.TimeUnit
 class ApiService {
 
     companion object {
-        private val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.MINUTES) // set the connection timeout
-            .readTimeout(30, TimeUnit.SECONDS) // set the read timeout
-            .writeTimeout(15, TimeUnit.SECONDS) // set the write timeout
+        private val client = OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.MINUTES) // set the connection timeout
+            .readTimeout(10, TimeUnit.MINUTES) // set the read timeout
+            .writeTimeout(10, TimeUnit.MINUTES) // set the write timeout
             .build()
 
         private val retrofit = Retrofit.Builder()
-            .baseUrl("https://restcountries.com/v2/")
-            .client(okHttpClient)
+            .baseUrl("https://restcountries.com/v3.1/")
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service: ApiClient by lazy { retrofit!!.create(ApiClient::class.java) }

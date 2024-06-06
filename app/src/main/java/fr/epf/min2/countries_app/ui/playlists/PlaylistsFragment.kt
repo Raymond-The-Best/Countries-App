@@ -22,6 +22,7 @@ class PlaylistsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        //val factory = SavedDataViewModelFactory(this, savedDataLoader)
         val playlistsViewModel =
             ViewModelProvider(this).get(PlaylistsViewModel::class.java)
 

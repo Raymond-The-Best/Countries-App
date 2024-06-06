@@ -27,8 +27,8 @@ data class Country(
 
 @Parcelize
 data class Name(
-    @SerializedName("common") val common: String,
-    @SerializedName("official") val official: String,
+    @SerializedName("common") var common: String,
+    @SerializedName("official") var official: String,
     @SerializedName("nativeName") val nativeName: Map<String, NativeName>
 ) : Parcelable
 
@@ -74,6 +74,6 @@ data class Translation(
 
 fun List<Country>.toCountryString(): String {
     return this.joinToString(separator = ", ") { country ->
-        "Country Name: ${country.name.common}, translations: ${country.translations["fra"]?.common}, Region: ${country.region}"
+        country.name.common
     }
 }

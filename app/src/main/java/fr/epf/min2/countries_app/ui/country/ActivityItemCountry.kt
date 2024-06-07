@@ -1,6 +1,7 @@
 package fr.epf.min2.countries_app.ui.country
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +38,6 @@ class ActivityItemCountry : AppCompatActivity() {
 
 
         val textViewName = findViewById<TextView>(R.id.NomPays)
-        val textViewDescription = findViewById<TextView>(R.id.titreInfos)
         val textViewRegion = findViewById<TextView>(R.id.Continent)
         val textViewCapital = findViewById<TextView>(R.id.Capitale)
         val textViewSubregion = findViewById<TextView>(R.id.infregion)
@@ -50,7 +50,6 @@ class ActivityItemCountry : AppCompatActivity() {
         val textViewDrivesOn = findViewById<TextView>(R.id.infconduite)
 
         textViewName.text = countryName
-        textViewDescription.text = countryDescription
         textViewRegion.text = countryRegion
         textViewCapital.text = countryCapital
         textViewSubregion.text = countrySubregion
@@ -77,6 +76,11 @@ class ActivityItemCountry : AppCompatActivity() {
         startMarker.position = startPoint
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(startMarker)
+
+        val returnButton: ImageButton = findViewById(R.id.returnButton)
+        returnButton.setOnClickListener {
+            finish()
+        }
 
     }
 

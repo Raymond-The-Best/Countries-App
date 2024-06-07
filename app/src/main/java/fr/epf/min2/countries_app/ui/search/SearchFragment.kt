@@ -45,6 +45,13 @@ class SearchFragment : Fragment() {
         searchViewModel.countries.observe(viewLifecycleOwner) { countries ->
             countriesList = countries
             Log.d(TAG, "The new countries list gotten in SearchFragment: ${countries.toCountryString()}")
+            // Initialize RecyclerView
+            val recyclerView = binding.listResultSearch
+            recyclerView.layoutManager = LinearLayoutManager(context)
+
+            // Initialize CountryAdapter
+            val adapter = CountryAdapter(countriesList)
+            recyclerView.adapter = adapter
         }
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
@@ -74,16 +81,6 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
-
-        // Generate a list of 20 Country objects
-        countriesList = Country.generate(20)
-        // Initialize RecyclerView
-        val recyclerView = binding.listResultSearch
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        // Initialize CountryAdapter
-        val adapter = CountryAdapter(countriesList)
-        recyclerView.adapter = adapter
         return root
     }
 

@@ -11,10 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import fr.epf.min2.countries_app.databinding.FragmentPlaylistsBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.epf.min2.countries_app.save.SharedPrefManager
-import fr.epf.min2.countries_app.save.model.Country
-import fr.epf.min2.countries_app.save.model.Playlist
 import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapter
-import java.util.Date
 
 private const val TAG = "PlaylistsFragment"
 class PlaylistsFragment : Fragment() {
@@ -43,8 +40,17 @@ class PlaylistsFragment : Fragment() {
             textView.text = it
         }
         //return root
+
+        _binding = FragmentPlaylistsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val playlistsViewModel = ViewModelProvider(this).get(PlaylistsViewModel::class.java)
         val sharedPrefManager = SharedPrefManager(requireContext())
-        playlistsViewModel.getPlaylists(sharedPrefManager)
+        playlistsViewModel.triggerPlaylistsUpdate(sharedPrefManager)
 
         playlistsViewModel._playlists.observe(viewLifecycleOwner) { playlists ->
             // On recupere la liste des playlists
@@ -53,14 +59,6 @@ class PlaylistsFragment : Fragment() {
             binding.affichPlaylist.adapter = PlaylistAdapter(playlists)
         }
 
-
-
-        _binding = FragmentPlaylistsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         // Initialize your RecyclerView and its adapter here
         // For example:

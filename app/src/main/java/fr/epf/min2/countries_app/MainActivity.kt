@@ -14,6 +14,8 @@ import fr.epf.min2.countries_app.databinding.ActivityMainBinding
 import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SavedDataLoader
 import fr.epf.min2.countries_app.save.SharedPrefManager
+import org.osmdroid.config.Configuration
+import org.osmdroid.config.IConfigurationProvider
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val osmConfig: IConfigurationProvider = Configuration.getInstance()
+        osmConfig.userAgentValue = "StandardUserAgent101"
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

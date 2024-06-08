@@ -69,7 +69,7 @@ class ActivityItemCountry : AppCompatActivity() {
         mapView.setMultiTouchControls(true)
 
         val mapController = mapView.controller
-        mapController.setZoom(9.5)
+        mapController.setZoom(5.0)
         val startPoint = GeoPoint(countryLat, countryLng)
         mapController.setCenter(startPoint)
 

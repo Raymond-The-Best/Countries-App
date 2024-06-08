@@ -23,7 +23,7 @@ class SearchViewModel : ViewModel() {
         emit(data)
     }*/
     fun lookUpInputedString(query: String) {
-        val data = SavedDataLoader.getInstance().lookupByNameSubstring(query)
+        val data = SavedDataLoader.getInstance().combinedLookup(query)
         countries.postValue(data)
     }
     fun sortAtoZ() {

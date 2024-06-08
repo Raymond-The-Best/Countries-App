@@ -50,6 +50,10 @@ data class Country(
                 )
             }
     }
+
+    override fun hashCode(): Int {
+        return name.common.hashCode()
+    }
 }
 
 @Parcelize

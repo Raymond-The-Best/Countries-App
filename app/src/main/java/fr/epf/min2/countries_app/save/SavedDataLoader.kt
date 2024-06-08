@@ -13,6 +13,7 @@ class SavedDataLoader private constructor(): ViewModel() {
 
     val countriesLiveData = MutableLiveData<List<Country>>()
     private val countryByName: MutableLiveData<HashMap<String, Country>> = MutableLiveData(HashMap())
+    private val countryByCapital : MutableLiveData<HashMap<String, Country>> = MutableLiveData(HashMap())
     val countryByRegion: MutableLiveData<HashMap<String, MutableList<Country>>> = MutableLiveData(HashMap())
     /**
      *  This class will be used to load the saved data from the json files contained in the savedData folder
@@ -53,22 +54,36 @@ class SavedDataLoader private constructor(): ViewModel() {
         }
     }
     private fun createDataMaps(countries: List<Country>) : List<Country> {
+
         for (country in countries) {
-            // Changement des noms du pays en français
-            country.name.common = country.translations["fra"]?.common ?: country.name.common
-            country.name.official = country.translations["fra"]?.official ?: country.name.official
+        // Changement des noms du pays en français
+        country.name.common = country.translations["fra"]?.common ?: country.name.common
+        country.name.official = country.translations["fra"]?.official ?: country.name.official
 
-            // Ajout des pays aux hashmaps
-            countryByName.value?.put(country.name.common, country)
+        // Ajout des pays aux hashmaps
+        countryByName.value?.put(country.name.common, country)
 
-            if (!countryByRegion.value?.containsKey(country.region)!!) {
-                countryByRegion.value?.put(country.region, mutableListOf())
+        // Ajout des pays aux hashmaps par capitale
+        Log.d(TAG, "Adding ${country.capital} to countryByCapital Hashmap")
+        // Check if the country.capital is a null object reference
+        if (country.capital != null) {
+            for (capital in country.capital) {
+                countryByCapital.value?.put(capital, country)
             }
-            countryByRegion.value?.get(country.region)?.add(country)
         }
+        else Log.d(TAG, "Capital is null for ${country.name.common}")
+
+        if (!countryByRegion.value?.containsKey(country.region)!!) {
+            countryByRegion.value?.put(country.region, mutableListOf())
+        }
+        countryByRegion.value?.get(country.region)?.add(country)
+    }
         countryByRegion.postValue(countryByRegion.value)
+
+
         return countries
     }
+
 
     fun lookupByName(name: String): Country? {
         return countryByName.value?.get(name)
@@ -78,5 +93,17 @@ class SavedDataLoader private constructor(): ViewModel() {
     }
     fun lookupByNameSubstring(substring: String): List<Country> {
         return countryByName.value?.filterKeys { it.contains(substring, ignoreCase = true) }?.values?.toList() ?: emptyList()
+    }
+    fun lookupByCapitalSubstring(substring: String): List<Country> {
+        return countryByCapital.value?.filterKeys { it.contains(substring, ignoreCase = true) }?.values?.toList() ?: emptyList()
+    }
+
+    fun combinedLookup(substring: String): List<Country> {
+        val countries = mutableListOf<Country>()
+        countries.addAll(lookupByNameSubstring(substring))
+        countries.addAll(lookupByCapitalSubstring(substring))
+        // Remove all null object references from the list
+        countries.removeAll { it == null }
+        return countries.toMutableSet().toList()
     }
 }

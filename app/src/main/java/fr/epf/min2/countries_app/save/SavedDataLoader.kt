@@ -64,14 +64,11 @@ class SavedDataLoader private constructor(): ViewModel() {
         countryByName.value?.put(country.name.common, country)
 
         // Ajout des pays aux hashmaps par capitale
-        Log.d(TAG, "Adding ${country.capital} to countryByCapital Hashmap")
-        // Check if the country.capital is a null object reference
         if (country.capital != null) {
             for (capital in country.capital) {
                 countryByCapital.value?.put(capital, country)
             }
         }
-        else Log.d(TAG, "Capital is null for ${country.name.common}")
 
         if (!countryByRegion.value?.containsKey(country.region)!!) {
             countryByRegion.value?.put(country.region, mutableListOf())

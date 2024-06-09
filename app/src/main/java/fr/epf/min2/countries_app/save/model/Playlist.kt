@@ -11,5 +11,6 @@ data class Playlist(
     @SerializedName("dateCreation") val dateCreation : Date,
     @SerializedName("pays") val pays : MutableList<Country>,
     @SerializedName("isDefault") val isDefault: Boolean,
-    @SerializedName("isDeletable") val isDeletable: Boolean
+    @SerializedName("isDeletable") val isDeletable: Boolean,
+    @SerializedName("image") val image: String
 ) : Parcelable

@@ -61,13 +61,13 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
         val plusBellesMontagnes = listOf("Népal", "Suisse", "Canada", "Pérou", "Nouvelle-Zélande", "Norvège", "Japon", "États-Unis", "France", "Italie").map { savedDataLoader.lookupByName(it)!!}
         val paysPlaylistCreee =  listOf("Japon", "Corée du Sud", "Canada", "États-Unis").map { savedDataLoader.lookupByName(it)!!}
         val defaultPlaylists = listOf(
-            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false),
-            Playlist("Visités", Date(), mutableListOf(), false, true),
-            Playlist("À visiter", Date(), mutableListOf(), false, true),
-            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false),
-            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false),
-            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false),
-            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableList(), false, true)
+            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false, "res/drawable/ic_baseline_favorite_24.xml"),
+            Playlist("Visités", Date(), mutableListOf(), false, true, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("À visiter", Date(), mutableListOf(), false, true, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableList(), false, true, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png")
         )
         defaultPlaylists.forEach {
             savePlaylist(it)

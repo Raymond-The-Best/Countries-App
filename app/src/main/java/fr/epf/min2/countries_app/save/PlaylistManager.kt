@@ -8,6 +8,7 @@ import java.util.Date
 
 class PlaylistManager private constructor(private val sharedPrefManager: SharedPrefManager) : ViewModel() {
     private val TAG = "PlaylistManager"
+    private val FAVORITES_NAME = "Favoris"
     val playlists = MutableLiveData<MutableList<Playlist>>()
 
     companion object{
@@ -60,9 +61,9 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
         val plusBellesMontagnes = listOf("Népal", "Suisse", "Canada", "Pérou", "Nouvelle-Zélande", "Norvège", "Japon", "États-Unis", "France", "Italie").map { savedDataLoader.lookupByName(it)!!}
         val paysPlaylistCreee =  listOf("Japon", "Corée du Sud", "Canada", "États-Unis").map { savedDataLoader.lookupByName(it)!!}
         val defaultPlaylists = listOf(
-            Playlist("Favoris", Date(), mutableListOf(), true, false),
-            Playlist("Visités", Date(), mutableListOf(), true, false),
-            Playlist("À visiter", Date(), mutableListOf(), true, false),
+            Playlist(FAVORITES_NAME, Date(), mutableListOf(), true, false),
+            Playlist("Visités", Date(), mutableListOf(), false, true),
+            Playlist("À visiter", Date(), mutableListOf(), false, true),
             Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false),
             Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false),
             Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false),
@@ -73,6 +74,32 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
         }
         Log.d(TAG, "Default playlists created")
 
+    }
+    fun isCountryFavorite(countryName: String) : Boolean {
+        val favPlaylist = localPlaylistsVar.find { it.nom == FAVORITES_NAME }
+        return favPlaylist?.pays?.find { it.name.common == countryName } != null
+    }
+    fun addCountryToFavorites(countryName: String) {
+        addCountryToPlaylist(FAVORITES_NAME, countryName)
+    }
+    fun removeCountryFromFavorites(countryName: String) {
+        removeCountryFromPlaylist(FAVORITES_NAME, countryName)
+    }
+    fun addCountryToPlaylist(playlistName: String, countryName: String) {
+        val playlist = localPlaylistsVar.find { it.nom == playlistName }
+        val country = SavedDataLoader.getInstance().lookupByName(countryName)
+        country?.let {
+            playlist?.pays?.add(it)
+            savePlaylist(playlist!!)
+        }
+    }
+    fun removeCountryFromPlaylist(playlistName: String, countryName: String) {
+        val playlist = localPlaylistsVar.find { it.nom == playlistName }
+        val country = SavedDataLoader.getInstance().lookupByName(countryName)
+        country?.let {
+            playlist?.pays?.remove(it)
+            savePlaylist(playlist!!)
+        }
     }
 
 }

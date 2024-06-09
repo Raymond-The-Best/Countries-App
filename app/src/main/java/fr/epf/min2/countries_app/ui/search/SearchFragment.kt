@@ -44,7 +44,6 @@ class SearchFragment : Fragment() {
 
         searchViewModel.countries.observe(viewLifecycleOwner) { countries ->
             countriesList = countries
-            Log.d(TAG, "The new countries list gotten in SearchFragment: ${countries.toCountryString()}")
             // Initialize RecyclerView
             val recyclerView = binding.listResultSearch
             recyclerView.layoutManager = LinearLayoutManager(context)
@@ -65,10 +64,6 @@ class SearchFragment : Fragment() {
                     Log.d(TAG, "Query submitted: $query")
                     searchViewModel.lookUpInputedString(query)
                     sharedPrefManager.saveSearchQuery(query)
-                    /*searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
-                        // Utiliser l'objet countries pour afficher les résultats
-                    })*/
-
                 }
                 return true
             }

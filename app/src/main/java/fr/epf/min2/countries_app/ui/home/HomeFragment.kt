@@ -45,14 +45,12 @@ class HomeFragment : Fragment() {
 
         homeViewModel._defaultPlaylists.observe(viewLifecycleOwner) { playlists ->
             // On recupere la liste des playlists
-            Log.d(TAG, "The new playlists list gotten in HomeFragment from ViewModel: ${playlists.map { it.nom }}")
+            Log.d(TAG, "The new playlists list gotten in HomeFragment from ViewModel:")
+            playlists.forEach {
+                Log.d(TAG, "Playlist: ${it.nom} ; Content : ${it.pays.map { it.name.common }}")
+            }
             // Afficher les playlists dans l'UI
         }
-        /*PlaylistManager.getInstance(sharedPrefManager).playlists.observe(viewLifecycleOwner) {
-            Log.d(TAG, "The new playlists list gotten in HomeFragment from Manager: ${it.map { it.nom }}")
-        }*/
-
-
         return binding.root
 
     }

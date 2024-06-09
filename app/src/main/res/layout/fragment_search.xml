@@ -8,15 +8,17 @@
 
     <SearchView
         android:id="@+id/searchBarComponent"
-        android:layout_width="302dp"
+        android:layout_width="297dp"
         android:layout_height="52dp"
         android:layout_marginStart="3dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listResultSearch"
-        android:layout_width="423dp"
+        android:layout_width="match_parent"
         android:layout_height="700dp"
         app:layout_constraintTop_toBottomOf="@+id/searchBarComponent"
         tools:itemCount="80"
@@ -25,25 +27,22 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Spinner
+        android:id="@+id/filtreContinent"
+        android:layout_width="53dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/AtoZSearch"
+        app:layout_constraintStart_toEndOf="@+id/searchBarComponent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/AtoZSearch"
         android:layout_width="53dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
         android:backgroundTint="@color/transparent"
         android:src="@drawable/baseline_sort_by_alpha_24"
-        app:layout_constraintEnd_toStartOf="@+id/filtreContinentSearch"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/filtreContinentSearch"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/europe" />
+        app:layout_constraintStart_toEndOf="@+id/filtreContinent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

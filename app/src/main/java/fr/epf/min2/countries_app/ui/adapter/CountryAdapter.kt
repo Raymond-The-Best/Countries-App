@@ -2,6 +2,7 @@ package fr.epf.min2.countries_app.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -63,15 +64,30 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
         holder.countryRegion.text = country.region
         Glide.with(holder.itemView.context).load(country.flags.png).into(holder.countryFlag)
 
+
+        var isFavorite = false
         holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
-        holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
 
         holder.favoriteButton.setOnClickListener {
-            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.favorite_color))
+            isFavorite = !isFavorite
+            val color = if (isFavorite) R.color.favorite_color else R.color.black
+            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, color))
         }
 
-        holder.addButton.setOnClickListener {
-            holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.teal_700))
+        holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
+
+        holder.addButton.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.purple_200))
+                    true
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
+                    true
+                }
+                else -> false
+            }
         }
     }
 

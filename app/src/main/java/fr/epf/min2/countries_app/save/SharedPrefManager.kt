@@ -51,6 +51,7 @@ class SharedPrefManager(context: Context) {
 
     // PLAYLISTS METHODS---------------------------------------------------------
     fun savePlaylist(playlist: Playlist) {
+        Log.d(TAG, "Saving playlist ${playlist.nom} in SharedPref")
         val editor = sharedPrefPlaylist.edit()
         val json = gson.toJson(playlist)
         editor.putString(playlist.nom, json)

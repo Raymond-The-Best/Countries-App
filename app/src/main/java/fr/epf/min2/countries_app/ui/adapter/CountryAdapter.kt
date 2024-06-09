@@ -1,6 +1,7 @@
 package fr.epf.min2.countries_app.ui.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,10 @@ import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.ui.country.ActivityItemCountry
 import com.bumptech.glide.Glide
+import fr.epf.min2.countries_app.save.PlaylistManager
+import fr.epf.min2.countries_app.save.SharedPrefManager
 
+private const val TAG = "CountryAdapter"
 class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
     inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -63,11 +67,26 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
         holder.countryRegion.text = country.region
         Glide.with(holder.itemView.context).load(country.flags.png).into(holder.countryFlag)
 
-        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
+        val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(holder.itemView.context))
+
+        var countryIsFavorite = playlistManager.isCountryFavorite(country.name.common)
+        var favoriteColorChoice = if(countryIsFavorite) R.color.favorite_color else R.color.black
+
+        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, favoriteColorChoice))
         holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
 
         holder.favoriteButton.setOnClickListener {
-            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.favorite_color))
+            // Change the color of the favorite button
+            countryIsFavorite = !countryIsFavorite
+            favoriteColorChoice = if(countryIsFavorite) R.color.favorite_color else R.color.black
+            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, favoriteColorChoice))
+            if (countryIsFavorite) {
+                Log.d(TAG, "Adding ${country.name.common} to favorites")
+                playlistManager.addCountryToFavorites(country.name.common)
+            } else {
+                playlistManager.removeCountryFromFavorites(country.name.common)
+                Log.d(TAG, "Removing ${country.name.common} from favorites")
+            }
         }
 
         holder.addButton.setOnClickListener {

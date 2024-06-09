@@ -61,7 +61,7 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
         val plusBellesMontagnes = listOf("Népal", "Suisse", "Canada", "Pérou", "Nouvelle-Zélande", "Norvège", "Japon", "États-Unis", "France", "Italie").map { savedDataLoader.lookupByName(it)!!}
         val paysPlaylistCreee =  listOf("Japon", "Corée du Sud", "Canada", "États-Unis").map { savedDataLoader.lookupByName(it)!!}
         val defaultPlaylists = listOf(
-            Playlist(FAVORITES_NAME, Date(), mutableListOf(), true, false),
+            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false),
             Playlist("Visités", Date(), mutableListOf(), false, true),
             Playlist("À visiter", Date(), mutableListOf(), false, true),
             Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false),

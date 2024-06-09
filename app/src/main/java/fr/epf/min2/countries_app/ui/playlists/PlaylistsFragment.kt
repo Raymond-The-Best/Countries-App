@@ -39,7 +39,6 @@ class PlaylistsFragment : Fragment() {
         playlistsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        //return root
 
         _binding = FragmentPlaylistsBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,25 +54,12 @@ class PlaylistsFragment : Fragment() {
         playlistsViewModel._playlists.observe(viewLifecycleOwner) { playlists ->
             // On recupere la liste des playlists
             Log.d(TAG, "The new playlists list gotten in PlaylistsFragment: ${playlists.map { it.nom }}")
+            playlists.forEach {
+                Log.d(TAG, "Playlist: ${it.nom} ; Content : ${it.pays.map { it.name.common }}")
+            }
             binding.affichPlaylist.layoutManager = LinearLayoutManager(context)
             binding.affichPlaylist.adapter = PlaylistAdapter(playlists)
         }
-
-
-        // Initialize your RecyclerView and its adapter here
-        // For example:
-        // binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        // binding.recyclerView.adapter = MyAdapter(myDataset)
-
-        /*val myDataset = listOf(
-            Playlist("Playlist 1", Date(), listOf<Country>(), false, true),
-            Playlist("Playlist 2", Date(), listOf<Country>(), false, true),
-            Playlist("Playlist 3", Date(), listOf<Country>(), false, true),
-            Playlist("Playlist 4", Date(), listOf<Country>(), false, true),
-            Playlist("Playlist 5", Date(), listOf<Country>(), false, true)
-        ) // Replace this with your actual data
-        binding.affichPlaylist.layoutManager = LinearLayoutManager(context)
-        binding.affichPlaylist.adapter = PlaylistAdapter(myDataset)*/
     }
 
     override fun onDestroyView() {

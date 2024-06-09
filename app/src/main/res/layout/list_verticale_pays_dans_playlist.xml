@@ -18,7 +18,7 @@
 
 
     <TextView
-        android:id="@+id/continentplaysplay"
+        android:id="@+id/continentpaysplay"
         android:layout_width="246dp"
         android:layout_height="27dp"
         android:layout_marginTop="12dp"

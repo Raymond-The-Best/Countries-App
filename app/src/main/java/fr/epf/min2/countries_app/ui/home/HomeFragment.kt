@@ -14,6 +14,7 @@ import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
 import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapter
+import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapterHori
 
 class HomeFragment : Fragment() {
     private val TAG : String = "HomeFragment"
@@ -42,7 +43,7 @@ class HomeFragment : Fragment() {
 
         // Configurez vos RecyclerViews
         val playlistRecyclerView: RecyclerView = binding.recyclerPlay
-        playlistRecyclerView.layoutManager = LinearLayoutManager(context)
+        playlistRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         playlistRecyclerView.adapter = playlistAdapter
 
         val africaRecyclerView: RecyclerView = binding.recyclerAfrique
@@ -57,7 +58,7 @@ class HomeFragment : Fragment() {
             // On recupere la liste des playlists
             Log.d(TAG, "The new playlists list gotten in HomeFragment from ViewModel: ${playlists.map { it.nom }}")
             // Afficher les playlists dans l'UI
-            playlistRecyclerView.adapter = PlaylistAdapter(playlists)
+            playlistRecyclerView.adapter = PlaylistAdapterHori(playlists)
         }
 
         //liste des pays triés par continent

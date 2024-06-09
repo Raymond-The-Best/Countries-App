@@ -20,31 +20,16 @@
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@drawable/ic_launcher_background" />
 
-    <ImageButton
-        android:id="@+id/addPlaylistHori"
-        android:layout_width="42dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="144dp"
-        android:backgroundTint="@color/transparent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="64dp"
-        tools:srcCompat="@drawable/add_playlist" />
-
     <TextView
         android:id="@+id/NomPlaylistHori"
         android:layout_width="118dp"
-        android:layout_height="26dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="NOM PLAYLIST"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="118dp" />
-
-    <ImageButton
-        android:id="@+id/DeletePlaylistHori"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparent"
-        app:srcCompat="@drawable/supprimer"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="144dp" />
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImagePlaylistHori" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

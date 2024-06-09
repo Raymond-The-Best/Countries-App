@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.item.ActivityItemCountry" />
-        <activity android:name=".ui.playlist.ActivityItemPlaylist" />
+        <activity android:name=".ui.item.ActivityItemPlaylist" />
     </application>
 
 </manifest>

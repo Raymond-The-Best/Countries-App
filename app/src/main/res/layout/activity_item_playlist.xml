@@ -7,19 +7,19 @@
 
     <TextView
         android:id="@+id/nomPlaylist"
-        android:layout_width="355dp"
-        android:layout_height="43dp"
+        android:layout_width="349dp"
+        android:layout_height="42dp"
         android:text="NOM PLAYLIST"
         android:textAlignment="center"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.737"
+        app:layout_constraintHorizontal_bias="0.741"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lsitPaysPlaylist"
+        android:id="@+id/listPaysPlaylist"
         android:layout_width="410dp"
         android:layout_height="678dp"
         android:layout_marginTop="3dp"
@@ -32,8 +32,11 @@
         android:id="@+id/returnbuttonPlaylist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:backgroundTint="@color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/nomPlaylist"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_arrow_back_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

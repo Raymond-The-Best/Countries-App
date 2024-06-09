@@ -71,7 +71,7 @@ class CountryPlaylistAdapter(private val countries: MutableList<Country>) : Recy
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_verticale_pays, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_verticale_pays_dans_playlist, parent, false)
         return CountryViewHolder(view)
     }
 

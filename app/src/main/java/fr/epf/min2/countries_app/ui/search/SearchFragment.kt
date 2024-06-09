@@ -29,7 +29,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var countriesList: List<Country>
-
+    private var isSortedAtoZ = false
 
 
     override fun onCreateView(
@@ -52,6 +52,8 @@ class SearchFragment : Fragment() {
             val adapter = CountryAdapter(countriesList)
             recyclerView.adapter = adapter
         }
+        // Trigger a search with an empty string to get all countries
+        searchViewModel.lookUpInputedString("")
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -76,6 +78,22 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
+
+        // Gestion du bouton de tri alphabétique
+        val aToZSearchButton = binding.AtoZSearch
+        aToZSearchButton.setOnClickListener {
+            if (isSortedAtoZ) {
+                // If the list is currently sorted A to Z, sort it Z to A
+                searchViewModel.sortZtoA()
+                isSortedAtoZ = false
+            } else {
+                // If the list is currently sorted Z to A, sort it A to Z
+                searchViewModel.sortAtoZ()
+                isSortedAtoZ = true
+            }
+        }
+
+
         return root
     }
 

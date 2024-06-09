@@ -83,7 +83,7 @@ data class Demonym(
 
 @Parcelize
 data class Car(
-    @SerializedName("side") val side: String
+    @SerializedName("side") var side: String
 ) : Parcelable
 
 @Parcelize

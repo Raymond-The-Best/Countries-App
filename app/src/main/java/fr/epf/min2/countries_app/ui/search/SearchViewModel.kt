@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fr.epf.min2.countries_app.save.SavedDataLoader
 import fr.epf.min2.countries_app.save.model.Country
+import java.text.Normalizer
 
 private const val TAG = "SearchViewModel"
 
@@ -29,14 +30,21 @@ class SearchViewModel : ViewModel() {
     fun sortAtoZ() {
         val data = countries.value
         if (data != null) {
-            val sortedData = data.sortedBy { it.name.common }
+            Log.d(TAG, "Sorting A to Z")
+            val sortedData = data.sortedWith(compareBy {
+                Normalizer.normalize(it.name.common, Normalizer.Form.NFD)
+                    .replace("\\p{M}".toRegex(), "")
+            })
             countries.postValue(sortedData)
         }
     }
     fun sortZtoA() {
         val data = countries.value
         if (data != null) {
-            val sortedData = data.sortedByDescending { it.name.common }
+            val sortedData = data.sortedWith(compareByDescending {
+                Normalizer.normalize(it.name.common, Normalizer.Form.NFD)
+                    .replace("\\p{M}".toRegex(), "")
+            })
             countries.postValue(sortedData)
         }
     }

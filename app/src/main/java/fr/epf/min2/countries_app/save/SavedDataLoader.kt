@@ -60,6 +60,9 @@ class SavedDataLoader private constructor(): ViewModel() {
         country.name.common = country.translations["fra"]?.common ?: country.name.common
         country.name.official = country.translations["fra"]?.official ?: country.name.official
 
+        // Changement de la langue pour la conduite
+        country.car.side = if(country.car.side == "right") "Droite" else "Gauche"
+
         // Ajout des pays aux hashmaps
         countryByName.value?.put(country.name.common, country)
 

@@ -9,10 +9,10 @@
     <string name="title_playlists">Playlists</string>
     <string name="sortButtonComponent">Search</string>
     <string-array name="continents_array">
+        <item>TOUS</item>
         <item>Afrique</item>
         <item>Antarctique</item>
-        <item>Amérique du Nord</item>
-        <item>Amérique du Sud</item>
+        <item>Amérique</item>
         <item>Asie</item>
         <item>Europe</item>
         <item>Oceanie</item>

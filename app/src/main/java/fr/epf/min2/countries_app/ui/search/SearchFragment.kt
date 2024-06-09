@@ -46,7 +46,7 @@ class SearchFragment : Fragment() {
         val searchViewModel =
             ViewModelProvider(this).get(SearchViewModel::class.java)
 
-        searchViewModel.countries.observe(viewLifecycleOwner) { countries ->
+        searchViewModel.filteredCountries.observe(viewLifecycleOwner) { countries ->
             countriesList = countries
             // Initialize RecyclerView
             val recyclerView = binding.listResultSearch
@@ -79,11 +79,23 @@ class SearchFragment : Fragment() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 val continent = parent.getItemAtPosition(pos) as String
-                // Mettez à jour votre recherche pour filtrer en fonction du continent sélectionné
+                Log.d(TAG, "Selected continent: $continent")
+                val continentTranslated = when (continent) {
+                    "Afrique" -> "Africa"
+                    "Antarctique" -> "Antarctic"
+                    "Amérique" -> "Americas"
+                    "Asie" -> "Asia"
+                    "Europe" -> "Europe"
+                    "Oceanie" -> "Oceania"
+                    "TOUS" -> ""
+                    else -> ""
+                }
+                searchViewModel.applyContientFilter(continentTranslated)
+                searchViewModel.lookUpInputedString("")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Si aucun continent n'est sélectionné, vous pouvez choisir de ne pas filtrer ou de réinitialiser le filtre
+                searchViewModel.applyContientFilter("")
             }
         }
 

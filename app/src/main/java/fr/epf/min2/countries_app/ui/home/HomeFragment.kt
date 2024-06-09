@@ -56,8 +56,8 @@ class HomeFragment : Fragment() {
         homeViewModel._defaultPlaylists.observe(viewLifecycleOwner) { playlists ->
             // On recupere la liste des playlists
             Log.d(TAG, "The new playlists list gotten in HomeFragment from ViewModel: ${playlists.map { it.nom }}")
-            // Mettez à jour votre adaptateur de playlists
-           // playlistAdapter.updateData(playlists)
+            // Afficher les playlists dans l'UI
+            playlistRecyclerView.adapter = PlaylistAdapter(playlists)
         }
 
         //liste des pays triés par continent

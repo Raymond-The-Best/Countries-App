@@ -29,8 +29,6 @@ class PlaylistAdapter (private val playlists: List<Playlist>) : RecyclerView.Ada
         }
 
     }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_verticale_playlist, parent, false)
         return PlaylistViewHolder(view)

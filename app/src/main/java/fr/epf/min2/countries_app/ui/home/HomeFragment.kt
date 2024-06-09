@@ -15,9 +15,6 @@ import fr.epf.min2.countries_app.save.SharedPrefManager
 class HomeFragment : Fragment() {
     private val TAG : String = "HomeFragment"
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

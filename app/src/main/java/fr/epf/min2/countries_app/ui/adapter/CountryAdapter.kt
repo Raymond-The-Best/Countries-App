@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Country
-import fr.epf.min2.countries_app.ui.country.ActivityItemCountry
+import fr.epf.min2.countries_app.ui.item.ActivityItemCountry
 import com.bumptech.glide.Glide
 
 class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {

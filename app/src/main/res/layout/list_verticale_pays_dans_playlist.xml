@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/nompaysplay"
+        android:layout_width="253dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="16dp"
+        android:text="PAYS"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="90dp" />
+
+
+    <TextView
+        android:id="@+id/continentplaysplay"
+        android:layout_width="246dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="12dp"
+        android:text="Description"
+        app:layout_constraintTop_toBottomOf="@+id/nompaysplay"
+        tools:layout_editor_absoluteX="90dp" />
+
+    <ImageView
+        android:id="@+id/imagePaysPlay"
+        android:layout_width="78dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/fr" />
+
+
+    <ImageButton
+        android:id="@+id/favpaysplay"
+        android:layout_width="31dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/outline_favorite_24" />
+
+    <ImageButton
+        android:id="@+id/addpaysplay"
+        android:layout_width="31dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favpaysplay"
+        app:srcCompat="@drawable/add_playlist" />
+
+    <ImageButton
+        android:id="@+id/delpaysplay"
+        android:layout_width="31dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addpaysplay"
+        app:srcCompat="@drawable/supprimer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

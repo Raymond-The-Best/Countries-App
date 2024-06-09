@@ -5,45 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
         android:id="@+id/DescDrapeauPays"
-        android:layout_width="200dp"
-        android:layout_height="125dp"
+        android:layout_width="191dp"
+        android:layout_height="105dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/fr" />
 
     <TextView
         android:id="@+id/NomPays"
-        android:layout_width="200dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
         android:text="Pays"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/DescDrapeauPays"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/returnButton"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/Continent"
         android:layout_width="200dp"
         android:layout_height="29dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="Continent"
-        app:layout_constraintStart_toEndOf="@+id/DescDrapeauPays"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Capitale" />
 
     <TextView
         android:id="@+id/Capitale"
         android:layout_width="200dp"
         android:layout_height="29dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="Capitale"
-        app:layout_constraintStart_toEndOf="@+id/DescDrapeauPays"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NomPays" />
 
     <TextView
@@ -53,6 +57,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="125dp"
         android:layout_marginEnd="15dp"
+        android:textStyle="bold"
         android:text="INFORMATIONS SUPPLÉMENTAIRES"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -265,6 +270,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="310dp"
+        android:textStyle="bold"
         android:text="CARTE"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -286,6 +292,18 @@
         app:layout_constraintTop_toBottomOf="@+id/scrollviewpays"
         app:layout_constraintVertical_bias="0.979" />
 
+    <ImageButton
+        android:id="@+id/returnButton"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/transparent"
+        android:elevation="2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

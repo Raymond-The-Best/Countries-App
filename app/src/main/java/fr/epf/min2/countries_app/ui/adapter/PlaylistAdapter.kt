@@ -12,7 +12,7 @@ class PlaylistAdapter (private val playlists: List<Playlist>) : RecyclerView.Ada
 
     class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nomPlaylistVerti: TextView = view.findViewById(R.id.nomPlaylistVerti)
-        // autres vues...
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
@@ -23,7 +23,7 @@ class PlaylistAdapter (private val playlists: List<Playlist>) : RecyclerView.Ada
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val playlist = playlists[position]
         holder.nomPlaylistVerti.text = playlist.nom
-        // définir les autres vues...
+
     }
 
     override fun getItemCount() = playlists.size

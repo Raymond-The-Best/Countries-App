@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -11,7 +11,7 @@
         android:id="@+id/ImagePlaylistHori"
         android:layout_width="118dp"
         android:layout_height="112dp"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,16 +27,16 @@
         android:layout_marginTop="144dp"
         android:backgroundTint="@color/transparent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteX="64dp"
         tools:srcCompat="@drawable/add_playlist" />
 
     <TextView
         android:id="@+id/NomPlaylistHori"
-        android:layout_width="68dp"
-        android:layout_height="27dp"
+        android:layout_width="118dp"
+        android:layout_height="26dp"
         android:text="NOM PLAYLIST"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="120dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="118dp" />
 
     <ImageButton
         android:id="@+id/DeletePlaylistHori"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent"
         app:srcCompat="@drawable/supprimer"
-        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="144dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

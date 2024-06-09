@@ -4,8 +4,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Country
@@ -18,6 +20,9 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
         val countryName: TextView = view.findViewById(R.id.nomPaysVerti)
         val countryRegion : TextView = view.findViewById(R.id.descPaysVerti)
         val countryFlag: ImageView = view.findViewById(R.id.imagePaysVerti)
+        val favoriteButton: ImageButton = view.findViewById(R.id.favVerti)
+        val addButton: ImageButton = view.findViewById(R.id.AddPaysVerti)
+
 
 
         init {
@@ -57,6 +62,17 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
         holder.countryName.text = country.name.common
         holder.countryRegion.text = country.region
         Glide.with(holder.itemView.context).load(country.flags.png).into(holder.countryFlag)
+
+        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
+        holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
+
+        holder.favoriteButton.setOnClickListener {
+            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.favorite_color))
+        }
+
+        holder.addButton.setOnClickListener {
+            holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.teal_700))
+        }
     }
 
     override fun getItemCount() = countries.size

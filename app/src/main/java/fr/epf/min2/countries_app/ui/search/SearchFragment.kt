@@ -45,6 +45,13 @@ class SearchFragment : Fragment() {
         searchViewModel.countries.observe(viewLifecycleOwner) { countries ->
             countriesList = countries
             Log.d(TAG, "The new countries list gotten in SearchFragment: ${countries.toCountryString()}")
+            // Initialize RecyclerView
+            val recyclerView = binding.listResultSearch
+            recyclerView.layoutManager = LinearLayoutManager(context)
+
+            // Initialize CountryAdapter
+            val adapter = CountryAdapter(countriesList)
+            recyclerView.adapter = adapter
         }
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
@@ -57,8 +64,8 @@ class SearchFragment : Fragment() {
                 if (query != null) {
                     Log.d(TAG, "Query submitted: $query")
                     searchViewModel.lookUpInputedString(query)
-                    /*sharedPrefManager.saveSearchQuery(query)
-                    searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
+                    sharedPrefManager.saveSearchQuery(query)
+                    /*searchViewModel.countries.observe(viewLifecycleOwner, { countries ->
                         // Utiliser l'objet countries pour afficher les résultats
                     })*/
 
@@ -70,19 +77,10 @@ class SearchFragment : Fragment() {
                 // Handle text changes here if needed
                 Log.d(TAG, "Text changed to $newText")
                 searchViewModel.lookUpInputedString(newText ?: "")
+                sharedPrefManager.getSearchHistory()
                 return true
             }
         })
-
-        // Generate a list of 20 Country objects
-        countriesList = Country.generate(20)
-        // Initialize RecyclerView
-        val recyclerView = binding.listResultSearch
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        // Initialize CountryAdapter
-        val adapter = CountryAdapter(countriesList)
-        recyclerView.adapter = adapter
         return root
     }
 

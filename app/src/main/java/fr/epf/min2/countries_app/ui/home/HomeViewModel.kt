@@ -8,10 +8,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fr.epf.min2.countries_app.api.ApiService
-import fr.epf.min2.countries_app.dataManipulation.LocalDataLookup
+import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SavedDataLoader
+import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
+import fr.epf.min2.countries_app.save.model.Playlist
 import fr.epf.min2.countries_app.save.model.toCountryString
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -22,12 +23,14 @@ import retrofit2.Callback
 
 private const val TAG = "HomeViewModel"
 class HomeViewModel: ViewModel() {
+    private var createdPlaylistObserver = false
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
     private val _countriesByRegion = MutableLiveData<Map<String, List<Country>>>()
-    val countriesByRegion: LiveData<Map<String, List<Country>>> = _countriesByRegion
+    //val countriesByRegion: LiveData<Map<String, List<Country>>> = _countriesByRegion
+    val _defaultPlaylists : MutableLiveData<List<Playlist>> = MutableLiveData()
 
     init {
         SavedDataLoader.getInstance().countryByRegion.observeForever {
@@ -47,6 +50,20 @@ class HomeViewModel: ViewModel() {
             _countriesByRegion.postValue(countriesByRegion)
             Log.d(TAG, "Countries by region: ${countriesByRegion.mapValues { (_, countries) -> countries.toCountryString() }}")
         }
+    }
+    fun triggerDefaultPlaylistUpdate(sharedPrefManager: SharedPrefManager) {
+        val playlistManager = PlaylistManager.getInstance(sharedPrefManager)
+        if(!createdPlaylistObserver) createPlaylistObserver(playlistManager)
+        else playlistManager.getDefaultPlaylists().let {
+            _defaultPlaylists.postValue(it)
+        }
+    }
+
+    private fun createPlaylistObserver(playlistManager: PlaylistManager) {
+        playlistManager.playlists.observeForever {
+            _defaultPlaylists.postValue(playlistManager.getDefaultPlaylists())
+        }
+        createdPlaylistObserver = true
     }
 
 }

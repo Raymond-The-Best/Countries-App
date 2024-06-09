@@ -10,9 +10,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import fr.epf.min2.countries_app.api.UpdateSavedData
-import fr.epf.min2.countries_app.dataManipulation.LocalDataLookup
 import fr.epf.min2.countries_app.databinding.ActivityMainBinding
+import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SavedDataLoader
+import fr.epf.min2.countries_app.save.SharedPrefManager
+import org.osmdroid.config.Configuration
+import org.osmdroid.config.IConfigurationProvider
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val osmConfig: IConfigurationProvider = Configuration.getInstance()
+        osmConfig.userAgentValue = "StandardUserAgent101"
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         loadDataFromLocal(this)
         UpdateSavedData.updateAllData(this)
+        PlaylistManager.getInstance(SharedPrefManager(this)).createDefaultPlaylists(SavedDataLoader.getInstance())
     }
     private fun loadDataFromLocal(context : Context) {
         // Load the data from the json file

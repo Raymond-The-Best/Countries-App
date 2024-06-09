@@ -1,4 +1,4 @@
-package fr.epf.min2.countries_app.ui.country
+package fr.epf.min2.countries_app.ui.item
 
 import android.os.Bundle
 import android.widget.ImageButton

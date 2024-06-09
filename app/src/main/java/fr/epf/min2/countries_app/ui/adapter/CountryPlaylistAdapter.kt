@@ -1,7 +1,7 @@
 package fr.epf.min2.countries_app.ui.adapter
 
+import android.app.AlertDialog
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -15,19 +15,18 @@ import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.ui.item.ActivityItemCountry
 import com.bumptech.glide.Glide
-import fr.epf.min2.countries_app.save.PlaylistManager
-import fr.epf.min2.countries_app.save.SharedPrefManager
+import fr.epf.min2.countries_app.save.model.Playlist
 
-private const val TAG = "CountryAdapter"
-class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+
+class CountryPlaylistAdapter(private val countries: MutableList<Country>) : RecyclerView.Adapter<CountryPlaylistAdapter.CountryViewHolder>() {
 
     inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val countryName: TextView = view.findViewById(R.id.nomPaysVerti)
-        val countryRegion : TextView = view.findViewById(R.id.descPaysVerti)
-        val countryFlag: ImageView = view.findViewById(R.id.imagePaysVerti)
-        val favoriteButton: ImageButton = view.findViewById(R.id.favVerti)
-        val addButton: ImageButton = view.findViewById(R.id.AddPaysVerti)
-
+        val countryName: TextView = view.findViewById(R.id.nompaysplay)
+        val countryRegion : TextView = view.findViewById(R.id.continentpaysplay)
+        val countryFlag: ImageView = view.findViewById(R.id.imagePaysPlay)
+        val favoriteButton: ImageButton = view.findViewById(R.id.favpaysplay)
+        val addButton: ImageButton = view.findViewById(R.id.addpaysplay)
+        val deleteButton: ImageButton = view.findViewById(R.id.delpaysplay)
 
 
         init {
@@ -54,11 +53,25 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
                     view.context.startActivity(intent)
                 }
             }
+            deleteButton.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    AlertDialog.Builder(view.context)
+                        .setTitle("Supprimer le pays")
+                        .setMessage("Êtes-vous sûr de vouloir supprimer ce pays de la playlist ?")
+                        .setPositiveButton("Oui") { _, _ ->
+                            countries.toMutableList().removeAt(position)
+                            notifyItemRemoved(position)
+                        }
+                        .setNegativeButton("Non", null)
+                        .show()
+                }
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_verticale_pays, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_verticale_pays_dans_playlist, parent, false)
         return CountryViewHolder(view)
     }
 
@@ -68,26 +81,14 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
         holder.countryRegion.text = country.region
         Glide.with(holder.itemView.context).load(country.flags.png).into(holder.countryFlag)
 
-        val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(holder.itemView.context))
 
-        var countryIsFavorite = playlistManager.isCountryFavorite(country.name.common)
-        var favoriteColorChoice = if(countryIsFavorite) R.color.favorite_color else R.color.black
-
-        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, favoriteColorChoice))
-        holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
+        var isFavorite = false
+        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
 
         holder.favoriteButton.setOnClickListener {
-            // Change the color of the favorite button
-            countryIsFavorite = !countryIsFavorite
-            favoriteColorChoice = if(countryIsFavorite) R.color.favorite_color else R.color.black
-            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, favoriteColorChoice))
-            if (countryIsFavorite) {
-                Log.d(TAG, "Adding ${country.name.common} to favorites")
-                playlistManager.addCountryToFavorites(country.name.common)
-            } else {
-                playlistManager.removeCountryFromFavorites(country.name.common)
-                Log.d(TAG, "Removing ${country.name.common} from favorites")
-            }
+            isFavorite = !isFavorite
+            val color = if (isFavorite) R.color.favorite_color else R.color.black
+            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, color))
         }
 
         holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))

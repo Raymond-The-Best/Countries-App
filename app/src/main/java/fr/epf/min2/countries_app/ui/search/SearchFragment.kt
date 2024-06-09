@@ -6,11 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.SearchView
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.databinding.FragmentSearchBinding
 import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
@@ -51,14 +55,37 @@ class SearchFragment : Fragment() {
             // Initialize CountryAdapter
             val adapter = CountryAdapter(countriesList)
             recyclerView.adapter = adapter
+
         }
         // Trigger a search with an empty string to get all countries
         searchViewModel.lookUpInputedString("")
+
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val sharedPrefManager = SharedPrefManager(requireContext())
+
+        val spinner: Spinner = binding.filtreContinent
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.continents_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                val continent = parent.getItemAtPosition(pos) as String
+                // Mettez à jour votre recherche pour filtrer en fonction du continent sélectionné
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Si aucun continent n'est sélectionné, vous pouvez choisir de ne pas filtrer ou de réinitialiser le filtre
+            }
+        }
 
         binding.searchBarComponent.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

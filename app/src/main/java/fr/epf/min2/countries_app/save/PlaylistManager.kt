@@ -3,6 +3,7 @@ package fr.epf.min2.countries_app.save
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Playlist
 import java.util.Date
 
@@ -61,13 +62,13 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
         val plusBellesMontagnes = listOf("Népal", "Suisse", "Canada", "Pérou", "Nouvelle-Zélande", "Norvège", "Japon", "États-Unis", "France", "Italie").map { savedDataLoader.lookupByName(it)!!}
         val paysPlaylistCreee =  listOf("Japon", "Corée du Sud", "Canada", "États-Unis").map { savedDataLoader.lookupByName(it)!!}
         val defaultPlaylists = listOf(
-            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false, true,"res/drawable/ic_baseline_favorite_24.xml"),
-            Playlist("Visités", Date(), mutableListOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("À visiter", Date(), mutableListOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableList(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png")
+            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false, true, R.drawable.fav_playlist),
+            Playlist("Visités", Date(), mutableListOf(), false, true, true,R.drawable.europe),
+            Playlist("À visiter", Date(), mutableListOf(), false, true, true,R.drawable.europe),
+            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false, false,R.drawable.europe),
+            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false, false,R.drawable.europe),
+            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false, false,R.drawable.europe),
+            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableList(), false, true, true,R.drawable.europe)
         )
         defaultPlaylists.forEach {
             savePlaylist(it)

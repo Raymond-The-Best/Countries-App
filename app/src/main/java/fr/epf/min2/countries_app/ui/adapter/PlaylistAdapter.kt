@@ -41,12 +41,11 @@ class PlaylistAdapter (private val playlists: List<Playlist>) : RecyclerView.Ada
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val playlist = playlists[position]
         holder.nomPlaylistVerti.text = playlist.nom
-        /*val imageResource = holder.itemView.context.resources.getIdentifier(
-            playlist.image, "drawable", holder.itemView.context.packageName
+        val imageResource = holder.itemView.context.resources.getIdentifier(
+            playlist.image.toString(), "drawable", holder.itemView.context.packageName
         )
-        holder.ImagePlaylistVerti.setBackgroundResource(imageResource)
-        */
-        holder.ImagePlaylistVerti.setImageResource(R.drawable.europe)
+        holder.ImagePlaylistVerti.setImageResource(imageResource)
+        //holder.ImagePlaylistVerti.setImageResource(R.drawable.europe)
 
 
 

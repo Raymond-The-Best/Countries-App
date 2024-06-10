@@ -10,21 +10,14 @@
         android:id="@+id/nomPlaylistVerti"
         android:layout_width="0dp"
         android:layout_height="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
         android:padding="1dp"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/ImagePlaylistVerti"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ImagePlaylistVerti"
         tools:text="NOM PLAYLIST" />
-
-    <TextView
-        android:id="@+id/descPlaylistVerti"
-        android:layout_width="252dp"
-        android:layout_height="16dp"
-        app:layout_constraintTop_toBottomOf="@id/nomPlaylistVerti"
-        app:layout_constraintStart_toEndOf="@id/ImagePlaylistVerti"
-        android:text="TextView" />
 
     <ImageView
         android:id="@+id/ImagePlaylistVerti"
@@ -40,18 +33,11 @@
         android:id="@+id/DeletePlaylistVerti"
         android:layout_width="33dp"
         android:layout_height="39dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="4dp"
         android:backgroundTint="@color/transparent"
-        app:srcCompat="@drawable/supprimer"
-        app:layout_constraintTop_toBottomOf="@id/addPlaylistVerti"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/addPlaylistVerti"
-        android:layout_width="33dp"
-        android:layout_height="41dp"
-        android:backgroundTint="@color/transparent"
-        app:srcCompat="@drawable/add_playlist"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:srcCompat="@drawable/supprimer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

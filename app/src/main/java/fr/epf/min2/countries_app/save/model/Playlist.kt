@@ -13,5 +13,5 @@ data class Playlist(
     @SerializedName("isDefault") val isDefault: Boolean,
     @SerializedName("isDeletable") val isDeletable: Boolean,
     @SerializedName("isEditable") val isEditable: Boolean,
-    @SerializedName("image") val image: String
+    @SerializedName("image") val image: Int
 ) : Parcelable

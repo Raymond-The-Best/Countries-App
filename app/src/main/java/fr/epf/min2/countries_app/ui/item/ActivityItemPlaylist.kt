@@ -13,8 +13,7 @@ import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.ui.adapter.CountryAdapter
 import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
-
-class ActivityItemPlaylist : AppCompatActivity() {
+class ActivityItemPlaylist : AppCompatActivity(), CountryPlaylistAdapter.OnDeleteButtonClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_playlist)
@@ -27,7 +26,7 @@ class ActivityItemPlaylist : AppCompatActivity() {
 
         playlistNameTextView.text = playlistName
 
-        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!) }
+        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!, this) }
         countriesRecyclerView.layoutManager = LinearLayoutManager(this)
         countriesRecyclerView.adapter = adapter
 
@@ -35,5 +34,11 @@ class ActivityItemPlaylist : AppCompatActivity() {
         returnButton.setOnClickListener {
             finish()
         }
+
+    }
+    override fun onDeleteButtonClick() {
+        val playlistName = intent.getStringExtra("PlaylistName")
+        val playlistCountries = intent.getParcelableArrayListExtra<Country>("PlaylistCountries")
+        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!, this) }
     }
 }

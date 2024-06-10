@@ -40,18 +40,11 @@
         android:id="@+id/DeletePlaylistVerti"
         android:layout_width="33dp"
         android:layout_height="39dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent"
-        app:srcCompat="@drawable/supprimer"
-        app:layout_constraintTop_toBottomOf="@id/addPlaylistVerti"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/addPlaylistVerti"
-        android:layout_width="33dp"
-        android:layout_height="41dp"
-        android:backgroundTint="@color/transparent"
-        app:srcCompat="@drawable/add_playlist"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:srcCompat="@drawable/supprimer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

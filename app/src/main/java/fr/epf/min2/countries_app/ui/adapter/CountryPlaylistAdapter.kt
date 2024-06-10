@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.R
@@ -21,7 +22,7 @@ import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Playlist
 
 private const val TAG = "CountryPlaylistAdapter"
-class CountryPlaylistAdapter(private val playlistName : String, private val countries: MutableList<Country>) : RecyclerView.Adapter<CountryPlaylistAdapter.CountryViewHolder>() {
+class CountryPlaylistAdapter(private val playlistName : String, private val countries: MutableList<Country>, private val listener: OnDeleteButtonClickListener) : RecyclerView.Adapter<CountryPlaylistAdapter.CountryViewHolder>() {
 
     inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val countryName: TextView = view.findViewById(R.id.nompaysplay)
@@ -33,6 +34,32 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
 
         val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(view.context))
         val playlist: Playlist? = playlistManager.getPlaylist(playlistName)
+
+        fun addCountryToPlaylist(holder : CountryPlaylistAdapter.CountryViewHolder, country: Country) {
+            Log.d(TAG, "Add button was FUCKING clicked")
+            // Retrieve all editable playlists
+            val editablePlaylists = playlistManager.getEditablePlaylists()
+
+            // Convert the playlists to an array of strings for the dialog
+            val playlistNames = editablePlaylists.map { it.nom }.toTypedArray()
+
+            // Create a new AlertDialog Builder
+            val builder = androidx.appcompat.app.AlertDialog.Builder(holder.itemView.context)
+            builder.setTitle("Sélectionner une playlist")
+
+            // Set the items and their click listener
+            builder.setItems(playlistNames) { _, which ->
+                // The 'which' argument contains the index position
+                // of the selected item
+                val selectedPlaylist = editablePlaylists[which]
+                playlistManager.addCountryToPlaylist(selectedPlaylist.nom, country.name.common)
+                Toast.makeText(holder.itemView.context, "${country.name.common} added to ${selectedPlaylist.nom}", Toast.LENGTH_SHORT).show()
+            }
+
+            // Create and show the AlertDialog
+            val dialog = builder.create()
+            dialog.show()
+        }
 
         init {
             view.setOnClickListener {
@@ -68,12 +95,12 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
                             // Récupérer le nom du pays
                             val countryToDelete: Country = countries.toMutableList()[position]
                             // Supprimer le pays de la playlist
-
-                            // Collect the name of the current displayed playlist
                             playlistManager.removeCountryFromPlaylist(playlistName, countryToDelete.name.common)
-
                             countries.toMutableList().removeAt(position)
+                            countries.removeAt(position)
                             notifyItemRemoved(position)
+                            listener.onDeleteButtonClick()
+
                         }
                         .setNegativeButton("Non", null)
                         .show()
@@ -128,6 +155,7 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.purple_200))
+                    holder.addCountryToPlaylist(holder, country)
                     true
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
@@ -140,4 +168,8 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
     }
 
     override fun getItemCount() = countries.size
+
+    interface OnDeleteButtonClickListener {
+        fun onDeleteButtonClick()
+    }
 }

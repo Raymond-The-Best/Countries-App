@@ -55,7 +55,7 @@ class PlaylistsFragment : Fragment() {
                 Log.d(TAG, "Playlist: ${it.nom} ; Content : ${it.pays.map { it.name.common }}")
             }
             binding.affichPlaylist.layoutManager = LinearLayoutManager(context)
-            binding.affichPlaylist.adapter = PlaylistAdapter(playlists)
+            binding.affichPlaylist.adapter = PlaylistAdapter(playlists.toMutableList())
         }
     }
 

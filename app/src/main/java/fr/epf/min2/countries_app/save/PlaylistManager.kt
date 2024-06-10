@@ -8,10 +8,11 @@ import java.util.Date
 
 class PlaylistManager private constructor(private val sharedPrefManager: SharedPrefManager) : ViewModel() {
     private val TAG = "PlaylistManager"
-    private val FAVORITES_NAME = "Favoris"
+
     val playlists = MutableLiveData<MutableList<Playlist>>()
 
     companion object{
+        const val FAVORITES_NAME = "Favoris"
         private var instance : PlaylistManager? = null
         fun getInstance(sharedPrefManager: SharedPrefManager) : PlaylistManager {
             if(instance == null) {
@@ -56,18 +57,18 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
         playlists.postValue(localPlaylistsVar)
     }
     fun createDefaultPlaylists(savedDataLoader: SavedDataLoader) {
-        val top10Meilleurs = listOf("France", "États-Unis", "Japon", "Allemagne", "Royaume-Uni", "Canada", "Italie", "Australie", "Espagne", "Suisse").map { savedDataLoader.lookupByName(it)!!}
-        val plusBellesPlages = listOf("Brésil", "Espagne", "Italie", "Australie", "Grèce", "Thaïlande", "Mexique", "Philippines", "Fidji", "Seychelles").map { savedDataLoader.lookupByName(it)!!}
-        val plusBellesMontagnes = listOf("Népal", "Suisse", "Canada", "Pérou", "Nouvelle-Zélande", "Norvège", "Japon", "États-Unis", "France", "Italie").map { savedDataLoader.lookupByName(it)!!}
-        val paysPlaylistCreee =  listOf("Japon", "Corée du Sud", "Canada", "États-Unis").map { savedDataLoader.lookupByName(it)!!}
-        val defaultPlaylists = listOf(
-            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false, true,"res/drawable/ic_baseline_favorite_24.xml"),
-            Playlist("Visités", Date(), mutableListOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("À visiter", Date(), mutableListOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableList(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png")
+        val top10Meilleurs = setOf("France", "États-Unis", "Japon", "Allemagne", "Royaume-Uni", "Canada", "Italie", "Australie", "Espagne", "Suisse").map { savedDataLoader.lookupByName(it)!!}
+        val plusBellesPlages = setOf("Brésil", "Espagne", "Italie", "Australie", "Grèce", "Thaïlande", "Mexique", "Philippines", "Fidji", "Seychelles").map { savedDataLoader.lookupByName(it)!!}
+        val plusBellesMontagnes = setOf("Népal", "Suisse", "Canada", "Pérou", "Nouvelle-Zélande", "Norvège", "Japon", "États-Unis", "France", "Italie").map { savedDataLoader.lookupByName(it)!!}
+        val paysPlaylistCreee =  setOf("Japon", "Corée du Sud", "Canada", "États-Unis").map { savedDataLoader.lookupByName(it)!!}
+        val defaultPlaylists = setOf(
+            Playlist(FAVORITES_NAME, Date(), mutableSetOf(), false, false, true,"res/drawable/ic_baseline_favorite_24.xml"),
+            Playlist("Visités", Date(), mutableSetOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("À visiter", Date(), mutableSetOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableSet(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableSet(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableSet(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableSet(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png")
         )
         defaultPlaylists.forEach {
             savePlaylist(it)
@@ -100,6 +101,10 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
             playlist?.pays?.remove(it)
             savePlaylist(playlist!!)
         }
+    }
+
+    fun getEditablePlaylists(): List<Playlist> {
+        return localPlaylistsVar.filter { it.isEditable }
     }
 
 }

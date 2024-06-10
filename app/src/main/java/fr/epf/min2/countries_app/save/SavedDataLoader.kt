@@ -56,17 +56,13 @@ class SavedDataLoader private constructor(): ViewModel() {
     private fun createDataMaps(countries: List<Country>) : List<Country> {
 
         for (country in countries) {
-        // Changement des noms du pays en français
         country.name.common = country.translations["fra"]?.common ?: country.name.common
         country.name.official = country.translations["fra"]?.official ?: country.name.official
 
-        // Changement de la langue pour la conduite
         country.car.side = if(country.car.side == "right") "Droite" else "Gauche"
 
-        // Ajout des pays aux hashmaps
         countryByName.value?.put(country.name.common, country)
 
-        // Ajout des pays aux hashmaps par capitale
         if (country.capital != null) {
             for (capital in country.capital) {
                 countryByCapital.value?.put(capital, country)
@@ -102,7 +98,7 @@ class SavedDataLoader private constructor(): ViewModel() {
         val countries = mutableListOf<Country>()
         countries.addAll(lookupByNameSubstring(substring))
         countries.addAll(lookupByCapitalSubstring(substring))
-        // Remove all null object references from the list
+
         countries.removeAll { it == null }
         return countries.toMutableSet().toList()
     }

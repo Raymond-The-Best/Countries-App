@@ -44,7 +44,7 @@ class HomeViewModel: ViewModel() {
 
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val regions = listOf("Europe", "Americas", "Antartic", "Asia", "Africa", "Oceania")
+                val regions = listOf("Europe", "Americas", "Antarctica", "Asia", "Africa", "Oceania")
                 val countriesByRegion = mutableMapOf<String, List<Country>>()
                 regions.map { region ->
                     countriesByRegion[region] =

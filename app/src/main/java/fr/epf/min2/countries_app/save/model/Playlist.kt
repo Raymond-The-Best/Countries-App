@@ -9,7 +9,7 @@ import java.util.Date
 data class Playlist(
     @SerializedName("nom") val nom : String,
     @SerializedName("dateCreation") val dateCreation : Date,
-    @SerializedName("pays") val pays : MutableList<Country>,
+    @SerializedName("pays") val pays : MutableSet<Country>,
     @SerializedName("isDefault") val isDefault: Boolean,
     @SerializedName("isDeletable") val isDeletable: Boolean,
     @SerializedName("isEditable") val isEditable: Boolean,

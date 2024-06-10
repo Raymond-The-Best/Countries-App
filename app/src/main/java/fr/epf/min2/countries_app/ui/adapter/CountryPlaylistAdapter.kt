@@ -132,10 +132,4 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
     }
 
     override fun getItemCount() = countries.size
-
-    fun updateCountries(countries: List<Country>) {
-        this.countries.clear()
-        this.countries.addAll(countries)
-        notifyDataSetChanged()
-    }
 }

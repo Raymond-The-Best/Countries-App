@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.databinding.FragmentHomeBinding
 import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SharedPrefManager
+import fr.epf.min2.countries_app.ui.adapter.CountryAdapterHori
 import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
 import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapter
 import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapterHori
@@ -22,12 +23,12 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var playlistAdapter: PlaylistAdapter
-    private lateinit var africaAdapter: CountryPlaylistAdapter
-    private lateinit var americaAdapter: CountryPlaylistAdapter
-    private lateinit var asiaAdapter: CountryPlaylistAdapter
-    private lateinit var europeAdapter: CountryPlaylistAdapter
-    private lateinit var oceaniaAdapter: CountryPlaylistAdapter
-    private lateinit var antarticaAdapter: CountryPlaylistAdapter
+    private lateinit var africaAdapter: CountryAdapterHori
+    private lateinit var americaAdapter: CountryAdapterHori
+    private lateinit var asiaAdapter: CountryAdapterHori
+    private lateinit var europeAdapter: CountryAdapterHori
+    private lateinit var oceaniaAdapter: CountryAdapterHori
+    private lateinit var antarticaAdapter: CountryAdapterHori
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,12 +43,12 @@ class HomeFragment : Fragment() {
 
 
         playlistAdapter = PlaylistAdapter(mutableListOf())
-        africaAdapter = CountryPlaylistAdapter("", mutableListOf())
-        americaAdapter = CountryPlaylistAdapter("", mutableListOf())
-        asiaAdapter = CountryPlaylistAdapter("", mutableListOf())
-        europeAdapter = CountryPlaylistAdapter("", mutableListOf())
-        oceaniaAdapter = CountryPlaylistAdapter("", mutableListOf())
-        antarticaAdapter = CountryPlaylistAdapter("", mutableListOf())
+        africaAdapter = CountryAdapterHori(mutableListOf())
+        americaAdapter = CountryAdapterHori(mutableListOf())
+        asiaAdapter = CountryAdapterHori( mutableListOf())
+        europeAdapter = CountryAdapterHori( mutableListOf())
+        oceaniaAdapter = CountryAdapterHori( mutableListOf())
+        antarticaAdapter = CountryAdapterHori( mutableListOf())
 
         val playlistRecyclerView: RecyclerView = binding.recyclerPlay
         playlistRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

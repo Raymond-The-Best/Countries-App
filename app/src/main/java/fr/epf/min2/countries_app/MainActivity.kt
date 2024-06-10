@@ -14,12 +14,18 @@ import fr.epf.min2.countries_app.databinding.ActivityMainBinding
 import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SavedDataLoader
 import fr.epf.min2.countries_app.save.SharedPrefManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.osmdroid.config.Configuration
 import org.osmdroid.config.IConfigurationProvider
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity";
+    private val mainScope = CoroutineScope(Dispatchers.Main)
 
     private lateinit var binding: ActivityMainBinding
 
@@ -44,15 +50,24 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        loadDataFromLocal(this)
-        UpdateSavedData.updateAllData(this)
-        PlaylistManager.getInstance(SharedPrefManager(this)).createDefaultPlaylists(SavedDataLoader.getInstance())
+
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                loadDataFromLocal(this@MainActivity)
+                UpdateSavedData.updateAllData(this@MainActivity)
+                PlaylistManager.getInstance(SharedPrefManager(this@MainActivity)).createDefaultPlaylists(SavedDataLoader.getInstance())
+            }
+        }
     }
     private fun loadDataFromLocal(context : Context) {
         // Load the data from the json file
         SavedDataLoader.getInstance().loadCountriesFromJsonFile(context)
         Log.d(TAG, "Loaded countries")
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mainScope.cancel()
     }
 }
 

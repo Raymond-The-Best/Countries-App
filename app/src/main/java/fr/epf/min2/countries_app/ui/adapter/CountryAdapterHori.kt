@@ -15,7 +15,7 @@ import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.ui.item.ActivityItemCountry
 import com.bumptech.glide.Glide
 
-class CountryAdapterHori(private val countries: List<Country>) : RecyclerView.Adapter<CountryAdapterHori.CountryViewHolder>() {
+class CountryAdapterHori(private val countries: MutableList<Country>) : RecyclerView.Adapter<CountryAdapterHori.CountryViewHolder>() {
 
     inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val countryName: TextView = view.findViewById(R.id.nomPaysVerti)
@@ -36,13 +36,13 @@ class CountryAdapterHori(private val countries: List<Country>) : RecyclerView.Ad
                     intent.putExtra("COUNTRY_DESCRIPTION", clickedCountry.region)
                     intent.putExtra("COUNTRY_FLAG_URL", clickedCountry.flags.png)
                     intent.putExtra("COUNTRY_REGION", clickedCountry.region)
-                    intent.putExtra("COUNTRY_CAPITAL", clickedCountry.capital.joinToString())
+                    intent.putExtra("COUNTRY_CAPITAL", clickedCountry.capital?.joinToString())
                     intent.putExtra("COUNTRY_SUBREGION", clickedCountry.subregion)
                     intent.putExtra("COUNTRY_INDEPENDENT", clickedCountry.independent)
                     intent.putExtra("COUNTRY_UN_MEMBER", clickedCountry.unMember)
-                    intent.putExtra("COUNTRY_CURRENCY", clickedCountry.currencies.values.joinToString { it.name })
-                    intent.putExtra("COUNTRY_LANGUAGE", clickedCountry.languages.values.joinToString())
-                    intent.putExtra("COUNTRY_DEMONYM", clickedCountry.demonyms.values.joinToString { it.male })
+                    intent.putExtra("COUNTRY_CURRENCY", clickedCountry.currencies.values?.joinToString { it.name })
+                    intent.putExtra("COUNTRY_LANGUAGE", clickedCountry.languages.values?.joinToString())
+                    intent.putExtra("COUNTRY_DEMONYM", clickedCountry.demonyms.values?.joinToString { it.male })
                     intent.putExtra("COUNTRY_POPULATION", clickedCountry.population)
                     intent.putExtra("COUNTRY_DRIVES_ON", clickedCountry.car.side)
                     intent.putExtra("COUNTRY_LAT", clickedCountry.capitalInfo.latlng[0])
@@ -92,4 +92,10 @@ class CountryAdapterHori(private val countries: List<Country>) : RecyclerView.Ad
     }
 
     override fun getItemCount() = countries.size
+
+    fun updateCountries(countries: List<Country>) {
+        this.countries.clear()
+        this.countries.addAll(countries)
+        notifyDataSetChanged()
+    }
 }

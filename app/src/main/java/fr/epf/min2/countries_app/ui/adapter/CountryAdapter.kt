@@ -33,7 +33,7 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
         init {
             view.setOnClickListener {
                 val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
+                if (position != RecyclerView.NO_POSITION && countries != null) {
                     val clickedCountry = countries[position]
                     val intent = Intent(view.context, ActivityItemCountry::class.java)
                     intent.putExtra("COUNTRY_NAME", clickedCountry.name.common)

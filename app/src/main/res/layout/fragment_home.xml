@@ -38,12 +38,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="417dp"
+        android:layout_width="420dp"
+        android:layout_height="300dp"
         android:layout_marginStart="3dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="3dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="85dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Afrique"
                 android:textAlignment="center"
-                android:textSize="15dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -84,7 +84,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Antarctique"
                 android:textAlignment="center"
-                android:textSize="15dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -104,7 +104,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Amérique"
                 android:textAlignment="center"
-                android:textSize="15dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -124,7 +124,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Asie"
                 android:textAlignment="center"
-                android:textSize="15dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -144,7 +144,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Europe"
                 android:textAlignment="center"
-                android:textSize="15dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -164,7 +164,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Océanie"
                 android:textAlignment="center"
-                android:textSize="15dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView

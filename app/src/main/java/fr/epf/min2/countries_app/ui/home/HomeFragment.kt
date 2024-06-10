@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.databinding.FragmentHomeBinding
 import fr.epf.min2.countries_app.save.PlaylistManager
+import fr.epf.min2.countries_app.save.SavedDataLoader
 import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.ui.adapter.CountryAdapterHori
 import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
@@ -43,12 +44,15 @@ class HomeFragment : Fragment(),  CountryPlaylistAdapter.OnDeleteButtonClickList
 
 
         playlistAdapter = PlaylistAdapter(mutableListOf())
+
         africaAdapter = CountryAdapterHori(mutableListOf(), this)
         americaAdapter = CountryAdapterHori(mutableListOf(), this)
         asiaAdapter = CountryAdapterHori( mutableListOf(), this)
         europeAdapter = CountryAdapterHori( mutableListOf(), this)
         oceaniaAdapter = CountryAdapterHori( mutableListOf(), this)
         antarticaAdapter = CountryAdapterHori( mutableListOf(), this)
+
+
 
         val playlistRecyclerView: RecyclerView = binding.recyclerPlay
         playlistRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -82,29 +86,27 @@ class HomeFragment : Fragment(),  CountryPlaylistAdapter.OnDeleteButtonClickList
         homeViewModel.triggerDefaultPlaylistUpdate(sharedPrefManager)
 
         homeViewModel._defaultPlaylists.observe(viewLifecycleOwner) { playlists ->
-            // On recupere la liste des playlists
             Log.d(TAG, "The new playlists list gotten in HomeFragment from ViewModel: ${playlists.map { it.nom }}")
-            // Afficher les playlists dans l'UI
             playlistRecyclerView.adapter = PlaylistAdapterHori(playlists)
         }
 
-        //liste des pays triés par continent
 
         homeViewModel._countriesByRegion.observe(viewLifecycleOwner) { countries ->
-            // Filtrez les pays par continent et mettez à jour vos adaptateurs de pays
+
             val africanCountries = countries["Africa"] ?: emptyList()
             val americanCountries = countries["Americas"] ?: emptyList()
             val asianCountries = countries["Asia"] ?: emptyList()
             val europeanCountries = countries["Europe"] ?: emptyList()
             val oceaniaCountries = countries["Oceania"] ?: emptyList()
-            val antarticaCountries = countries["Antartic"] ?: emptyList()
-            // Update the adapters
+            val antarcticaCountryNames = listOf("Terre australes et antarctiques", "Antarctique", "Île Bouvet", "Îles Heard-et-MacDonald", "Géorgie du Sud-et-les Îles Sandwich du Sud")
+            val antarcticaCountries = antarcticaCountryNames.map { SavedDataLoader.getInstance().lookupByName(it) }.filterNotNull()
+
             africaAdapter.updateCountries(africanCountries)
             americaAdapter.updateCountries(americanCountries)
             asiaAdapter.updateCountries(asianCountries)
             europeAdapter.updateCountries(europeanCountries)
             oceaniaAdapter.updateCountries(oceaniaCountries)
-            antarticaAdapter.updateCountries(antarticaCountries)
+            antarticaAdapter.updateCountries(antarcticaCountries)
 
         }
 
@@ -121,50 +123,3 @@ class HomeFragment : Fragment(),  CountryPlaylistAdapter.OnDeleteButtonClickList
         TODO("Not yet implemented")
     }
 }
-
-/*
-class HomeFragment : Fragment() {
-    private val TAG : String = "HomeFragment"
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        /*val root: View = binding.root
-
-        val textView: TextView = binding.titrePlaylistAccueil
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
-        homeViewModel.getCountriesByRegion()
-        return root
-        */
-        val sharedPrefManager = SharedPrefManager(requireContext())
-        homeViewModel.triggerDefaultPlaylistUpdate(sharedPrefManager)
-
-        homeViewModel._defaultPlaylists.observe(viewLifecycleOwner) { playlists ->
-            // On recupere la liste des playlists
-            Log.d(TAG, "The new playlists list gotten in HomeFragment from ViewModel:")
-            playlists.forEach {
-                Log.d(TAG, "Playlist: ${it.nom} ; Content : ${it.pays.map { it.name.common }}")
-            }
-            // Afficher les playlists dans l'UI
-        }
-        return binding.root
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-}*/

@@ -1,5 +1,6 @@
 package fr.epf.min2.countries_app.ui.item
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -7,9 +8,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import fr.epf.min2.countries_app.R
+import fr.epf.min2.countries_app.save.model.Country
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import android.util.Log
 
 class ActivityItemCountry : AppCompatActivity() {
 
@@ -30,6 +33,7 @@ class ActivityItemCountry : AppCompatActivity() {
         val countryLanguage = intent.getStringExtra("COUNTRY_LANGUAGE")
         val countryDemonym = intent.getStringExtra("COUNTRY_DEMONYM")
         val countryPopulation = intent.getLongExtra("COUNTRY_POPULATION",0L,)
+        Log.d("ActivityItemCountry", "Population: $countryPopulation")
         val countryDrivesOn = intent.getStringExtra("COUNTRY_DRIVES_ON")
         val countryFlagUrl = intent.getStringExtra("COUNTRY_FLAG_URL")
         val countryLat = intent.getDoubleExtra("COUNTRY_LAT", 0.0)

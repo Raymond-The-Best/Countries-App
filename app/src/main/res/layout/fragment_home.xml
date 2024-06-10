@@ -94,35 +94,16 @@
                 tools:listitem="@layout/list_horizontale_pays" />
 
             <TextView
-                android:id="@+id/ameNord"
+                android:id="@+id/amerique"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Amérique du Nord"
+                android:text="Amérique"
                 android:textAlignment="center"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerAmeNord"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="18dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/list_horizontale_pays" />
-
-            <TextView
-                android:id="@+id/ameSud"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Amérique du Sud"
-                android:textAlignment="center"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerAmeSud"
+                android:id="@+id/recyclerAmerique"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"

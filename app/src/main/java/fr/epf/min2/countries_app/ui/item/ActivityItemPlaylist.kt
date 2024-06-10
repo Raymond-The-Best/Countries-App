@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.R
+import fr.epf.min2.countries_app.save.PlaylistManager
+import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.ui.adapter.CountryAdapter
 import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
@@ -25,7 +27,7 @@ class ActivityItemPlaylist : AppCompatActivity() {
 
         playlistNameTextView.text = playlistName
 
-        val adapter = CountryPlaylistAdapter(playlistCountries!!)
+        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!) }
         countriesRecyclerView.layoutManager = LinearLayoutManager(this)
         countriesRecyclerView.adapter = adapter
 

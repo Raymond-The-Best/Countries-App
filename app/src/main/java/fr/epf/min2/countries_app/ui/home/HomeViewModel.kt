@@ -14,9 +14,11 @@ import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.save.model.Playlist
 import fr.epf.min2.countries_app.save.model.toCountryString
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
@@ -28,7 +30,7 @@ class HomeViewModel: ViewModel() {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
-    private val _countriesByRegion = MutableLiveData<Map<String, List<Country>>>()
+    val _countriesByRegion = MutableLiveData<Map<String, List<Country>>>()
     //val countriesByRegion: LiveData<Map<String, List<Country>>> = _countriesByRegion
     val _defaultPlaylists : MutableLiveData<List<Playlist>> = MutableLiveData()
 
@@ -41,14 +43,15 @@ class HomeViewModel: ViewModel() {
     fun getCountriesByRegion() {
 
         viewModelScope.launch {
-            val regions = listOf("Europe", "Americas", "Antartic", "Asia", "Africa", "Oceania")
-            val countriesByRegion = mutableMapOf<String, List<Country>>()
-            regions.map {region ->
-                countriesByRegion[region] = SavedDataLoader.getInstance().lookupByRegion(region) ?: emptyList()
+            withContext(Dispatchers.IO) {
+                val regions = listOf("Europe", "Americas", "Antartic", "Asia", "Africa", "Oceania")
+                val countriesByRegion = mutableMapOf<String, List<Country>>()
+                regions.map { region ->
+                    countriesByRegion[region] =
+                        SavedDataLoader.getInstance().lookupByRegion(region) ?: emptyList()
+                }
+                _countriesByRegion.postValue(countriesByRegion)
             }
-
-            _countriesByRegion.postValue(countriesByRegion)
-            Log.d(TAG, "Countries by region: ${countriesByRegion.mapValues { (_, countries) -> countries.toCountryString() }}")
         }
     }
     fun triggerDefaultPlaylistUpdate(sharedPrefManager: SharedPrefManager) {

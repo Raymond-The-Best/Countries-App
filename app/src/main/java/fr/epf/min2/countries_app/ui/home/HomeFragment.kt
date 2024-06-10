@@ -23,7 +23,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var playlistAdapter: PlaylistAdapter
     private lateinit var africaAdapter: CountryPlaylistAdapter
-    // Définissez d'autres adaptateurs pour les autres continents
+    private lateinit var americaAdapter: CountryPlaylistAdapter
+    private lateinit var asiaAdapter: CountryPlaylistAdapter
+    private lateinit var europeAdapter: CountryPlaylistAdapter
+    private lateinit var oceaniaAdapter: CountryPlaylistAdapter
+    private lateinit var antarticaAdapter: CountryPlaylistAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,12 +40,15 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // Initialisez vos adaptateurs
-        playlistAdapter = PlaylistAdapter(mutableListOf())
-        africaAdapter = CountryPlaylistAdapter(mutableListOf())
-        // Initialisez d'autres adaptateurs pour les autres continents
 
-        // Configurez vos RecyclerViews
+        playlistAdapter = PlaylistAdapter(mutableListOf())
+        africaAdapter = CountryPlaylistAdapter("", mutableListOf())
+        americaAdapter = CountryPlaylistAdapter("", mutableListOf())
+        asiaAdapter = CountryPlaylistAdapter("", mutableListOf())
+        europeAdapter = CountryPlaylistAdapter("", mutableListOf())
+        oceaniaAdapter = CountryPlaylistAdapter("", mutableListOf())
+        antarticaAdapter = CountryPlaylistAdapter("", mutableListOf())
+
         val playlistRecyclerView: RecyclerView = binding.recyclerPlay
         playlistRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         playlistRecyclerView.adapter = playlistAdapter
@@ -49,7 +56,26 @@ class HomeFragment : Fragment() {
         val africaRecyclerView: RecyclerView = binding.recyclerAfrique
         africaRecyclerView.layoutManager = LinearLayoutManager(context)
         africaRecyclerView.adapter = africaAdapter
-        // Configurez d'autres RecyclerViews pour les autres continents
+
+        val americaRecyclerView: RecyclerView = binding.recyclerAmerique
+        americaRecyclerView.layoutManager = LinearLayoutManager(context)
+        americaRecyclerView.adapter = americaAdapter
+
+        val asiaRecyclerView: RecyclerView = binding.recyclerAsie
+        asiaRecyclerView.layoutManager = LinearLayoutManager(context)
+        asiaRecyclerView.adapter = asiaAdapter
+
+        val europeRecyclerView: RecyclerView = binding.recyclerEurope
+        europeRecyclerView.layoutManager = LinearLayoutManager(context)
+        europeRecyclerView.adapter = europeAdapter
+
+        val oceaniaRecyclerView: RecyclerView = binding.recyclerOceanie
+        oceaniaRecyclerView.layoutManager = LinearLayoutManager(context)
+        oceaniaRecyclerView.adapter = oceaniaAdapter
+
+        val antarticaRecyclerView: RecyclerView = binding.recyclerAntarctique
+        antarticaRecyclerView.layoutManager = LinearLayoutManager(context)
+        antarticaRecyclerView.adapter = antarticaAdapter
 
         val sharedPrefManager = SharedPrefManager(requireContext())
         homeViewModel.triggerDefaultPlaylistUpdate(sharedPrefManager)
@@ -62,14 +88,25 @@ class HomeFragment : Fragment() {
         }
 
         //liste des pays triés par continent
-        /*
-        homeViewModel.getCountriesByRegion().observe(viewLifecycleOwner) { countries ->
+
+        homeViewModel._countriesByRegion.observe(viewLifecycleOwner) { countries ->
             // Filtrez les pays par continent et mettez à jour vos adaptateurs de pays
-            val africanCountries = countries.filter { it.region == "Africa" }
-           // africaAdapter.updateData(africanCountries)
-            // Faites de même pour les autres continents
+            val africanCountries = countries["Africa"] ?: emptyList()
+            val americanCountries = countries["Americas"] ?: emptyList()
+            val asianCountries = countries["Asia"] ?: emptyList()
+            val europeanCountries = countries["Europe"] ?: emptyList()
+            val oceaniaCountries = countries["Oceania"] ?: emptyList()
+            val antarticaCountries = countries["Antartic"] ?: emptyList()
+            // Update the adapters
+            africaAdapter.updateCountries(africanCountries)
+            americaAdapter.updateCountries(americanCountries)
+            asiaAdapter.updateCountries(asianCountries)
+            europeAdapter.updateCountries(europeanCountries)
+            oceaniaAdapter.updateCountries(oceaniaCountries)
+            antarticaAdapter.updateCountries(antarticaCountries)
+
         }
-        */
+
 
         return binding.root
     }

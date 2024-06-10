@@ -21,7 +21,7 @@ import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Playlist
 
 private const val TAG = "CountryPlaylistAdapter"
-class CountryPlaylistAdapter(private val countries: MutableList<Country>) : RecyclerView.Adapter<CountryPlaylistAdapter.CountryViewHolder>() {
+class CountryPlaylistAdapter(private val playlistName : String, private val countries: MutableList<Country>) : RecyclerView.Adapter<CountryPlaylistAdapter.CountryViewHolder>() {
 
     inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val countryName: TextView = view.findViewById(R.id.nompaysplay)
@@ -63,6 +63,13 @@ class CountryPlaylistAdapter(private val countries: MutableList<Country>) : Recy
                         .setTitle("Supprimer le pays")
                         .setMessage("Êtes-vous sûr de vouloir supprimer ce pays de la playlist ?")
                         .setPositiveButton("Oui") { _, _ ->
+                            // Récupérer le nom du pays
+                            val countryToDelete: Country = countries.toMutableList()[position]
+                            // Supprimer le pays de la playlist
+                            val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(view.context))
+                            // Collect the name of the current displayed playlist
+                            playlistManager.removeCountryFromPlaylist(playlistName, countryToDelete.name.common)
+
                             countries.toMutableList().removeAt(position)
                             notifyItemRemoved(position)
                         }
@@ -125,4 +132,10 @@ class CountryPlaylistAdapter(private val countries: MutableList<Country>) : Recy
     }
 
     override fun getItemCount() = countries.size
+
+    fun updateCountries(countries: List<Country>) {
+        this.countries.clear()
+        this.countries.addAll(countries)
+        notifyDataSetChanged()
+    }
 }

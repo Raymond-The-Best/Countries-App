@@ -31,6 +31,8 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
         val addButton: ImageButton = view.findViewById(R.id.addpaysplay)
         val deleteButton: ImageButton = view.findViewById(R.id.delpaysplay)
 
+        val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(view.context))
+        val playlist: Playlist? = playlistManager.getPlaylist(playlistName)
 
         init {
             view.setOnClickListener {
@@ -66,7 +68,7 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
                             // Récupérer le nom du pays
                             val countryToDelete: Country = countries.toMutableList()[position]
                             // Supprimer le pays de la playlist
-                            val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(view.context))
+
                             // Collect the name of the current displayed playlist
                             playlistManager.removeCountryFromPlaylist(playlistName, countryToDelete.name.common)
 
@@ -112,6 +114,12 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
                 playlistManager.removeCountryFromFavorites(country.name.common)
                 Log.d(TAG, "Removing ${country.name.common} from favorites")
             }
+        }
+        // Check if the playlist is editable
+        if (holder.playlist?.isEditable == true) {
+            holder.deleteButton.visibility = View.VISIBLE
+        } else {
+            holder.deleteButton.visibility = View.GONE
         }
 
         holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))

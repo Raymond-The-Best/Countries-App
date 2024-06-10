@@ -61,13 +61,13 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
         val plusBellesMontagnes = listOf("Népal", "Suisse", "Canada", "Pérou", "Nouvelle-Zélande", "Norvège", "Japon", "États-Unis", "France", "Italie").map { savedDataLoader.lookupByName(it)!!}
         val paysPlaylistCreee =  listOf("Japon", "Corée du Sud", "Canada", "États-Unis").map { savedDataLoader.lookupByName(it)!!}
         val defaultPlaylists = listOf(
-            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false, "res/drawable/ic_baseline_favorite_24.xml"),
-            Playlist("Visités", Date(), mutableListOf(), false, true, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("À visiter", Date(), mutableListOf(), false, true, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
-            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableList(), false, true, "https://cdn-icons-png.flaticon.com/512/1077/1077035.png")
+            Playlist(FAVORITES_NAME, Date(), mutableListOf(), false, false, true,"res/drawable/ic_baseline_favorite_24.xml"),
+            Playlist("Visités", Date(), mutableListOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("À visiter", Date(), mutableListOf(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Top 10 des meilleurs pays", Date(), top10Meilleurs.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Les plus belles plages", Date(), plusBellesPlages.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Les plus belles montagnes", Date(), plusBellesMontagnes.toMutableList(), true, false, false,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png"),
+            Playlist("Template playlist", Date(), paysPlaylistCreee.toMutableList(), false, true, true,"https://cdn-icons-png.flaticon.com/512/1077/1077035.png")
         )
         defaultPlaylists.forEach {
             savePlaylist(it)

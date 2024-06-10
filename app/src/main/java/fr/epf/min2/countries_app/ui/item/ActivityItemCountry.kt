@@ -29,9 +29,8 @@ class ActivityItemCountry : AppCompatActivity() {
         val countryCurrency = intent.getStringExtra("COUNTRY_CURRENCY")
         val countryLanguage = intent.getStringExtra("COUNTRY_LANGUAGE")
         val countryDemonym = intent.getStringExtra("COUNTRY_DEMONYM")
-        val countryPopulation = intent.getIntExtra("COUNTRY_POPULATION", 0)
+        val countryPopulation = intent.getIntExtra("COUNTRY_POPULATION",0,)
         val countryDrivesOn = intent.getStringExtra("COUNTRY_DRIVES_ON")
-
         val countryFlagUrl = intent.getStringExtra("COUNTRY_FLAG_URL")
         val countryLat = intent.getDoubleExtra("COUNTRY_LAT", 0.0)
         val countryLng = intent.getDoubleExtra("COUNTRY_LNG", 0.0)

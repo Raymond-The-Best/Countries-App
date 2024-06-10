@@ -14,17 +14,16 @@ import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.ui.item.ActivityItemCountry
 import com.bumptech.glide.Glide
+import fr.epf.min2.countries_app.save.PlaylistManager
+import fr.epf.min2.countries_app.save.SharedPrefManager
 
-class CountryAdapterHori(private val countries: MutableList<Country>) : RecyclerView.Adapter<CountryAdapterHori.CountryViewHolder>() {
+class CountryAdapterHori(private val countries: MutableList<Country>, private val listener: CountryPlaylistAdapter.OnDeleteButtonClickListener) : RecyclerView.Adapter<CountryAdapterHori.CountryViewHolder>() {
 
-    inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class CountryViewHolder(view: View)  : RecyclerView.ViewHolder(view), CommonCountryAdapter.CountryViewHolder {
         val countryName: TextView = view.findViewById(R.id.nomPaysHori)
         val countryFlag: ImageView = view.findViewById(R.id.imagePaysHori)
-        val favoriteButton: ImageButton = view.findViewById(R.id.buttonFavHori)
-        val addButton: ImageButton = view.findViewById(R.id.addPaysHori)
-
-
-
+        override val favoriteButton: ImageButton = view.findViewById(R.id.buttonFavHori)
+        override val addButton: ImageButton = view.findViewById(R.id.addPaysHori)
         init {
             view.setOnClickListener {
                 val position = adapterPosition
@@ -63,21 +62,22 @@ class CountryAdapterHori(private val countries: MutableList<Country>) : Recycler
         Glide.with(holder.itemView.context).load(country.flags.png).into(holder.countryFlag)
 
 
-        var isFavorite = false
-        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
+        val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(holder.itemView.context))
 
-        holder.favoriteButton.setOnClickListener {
-            isFavorite = !isFavorite
-            val color = if (isFavorite) R.color.favorite_color else R.color.black
-            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, color))
-        }
+        var countryIsFavorite = playlistManager.isCountryFavorite(country.name.common)
+        val colorChoice = if (countryIsFavorite) R.color.favorite_color else R.color.black
+        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, colorChoice))
+
+        CommonCountryAdapter.handleFavoriteButton(holder, country, playlistManager, holder.itemView.context)
+
+        //holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, favoriteColorChoice))
 
         holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
-
         holder.addButton.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.purple_200))
+                    CommonCountryAdapter.addCountryToPlaylist(holder, country, playlistManager, holder.itemView.context)
                     true
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {

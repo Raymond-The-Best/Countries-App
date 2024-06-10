@@ -17,7 +17,7 @@ import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
 import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapter
 import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapterHori
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),  CountryPlaylistAdapter.OnDeleteButtonClickListener {
     private val TAG : String = "HomeFragment"
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -43,12 +43,12 @@ class HomeFragment : Fragment() {
 
 
         playlistAdapter = PlaylistAdapter(mutableListOf())
-        africaAdapter = CountryAdapterHori(mutableListOf())
-        americaAdapter = CountryAdapterHori(mutableListOf())
-        asiaAdapter = CountryAdapterHori( mutableListOf())
-        europeAdapter = CountryAdapterHori( mutableListOf())
-        oceaniaAdapter = CountryAdapterHori( mutableListOf())
-        antarticaAdapter = CountryAdapterHori( mutableListOf())
+        africaAdapter = CountryAdapterHori(mutableListOf(), this)
+        americaAdapter = CountryAdapterHori(mutableListOf(), this)
+        asiaAdapter = CountryAdapterHori( mutableListOf(), this)
+        europeAdapter = CountryAdapterHori( mutableListOf(), this)
+        oceaniaAdapter = CountryAdapterHori( mutableListOf(), this)
+        antarticaAdapter = CountryAdapterHori( mutableListOf(), this)
 
         val playlistRecyclerView: RecyclerView = binding.recyclerPlay
         playlistRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -115,6 +115,10 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDeleteButtonClick() {
+        TODO("Not yet implemented")
     }
 }
 

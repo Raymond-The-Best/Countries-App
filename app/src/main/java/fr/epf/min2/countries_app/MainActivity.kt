@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         mainScope.launch {
             withContext(Dispatchers.IO) {
                 loadDataFromLocal(this@MainActivity)
-                UpdateSavedData.updateAllData(this@MainActivity)
+                //UpdateSavedData.updateAllData(this@MainActivity)
                 PlaylistManager.getInstance(SharedPrefManager(this@MainActivity)).createDefaultPlaylists(SavedDataLoader.getInstance())
             }
         }

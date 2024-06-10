@@ -21,40 +21,17 @@ import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SharedPrefManager
 
 private const val TAG = "CountryAdapter"
-class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+class CountryAdapter(private val countries: List<Country>, private val listener: CountryPlaylistAdapter.OnDeleteButtonClickListener) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
-    inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view), CommonCountryAdapter.CountryViewHolder  {
         val countryName: TextView = view.findViewById(R.id.nomPaysVerti)
         val countryRegion : TextView = view.findViewById(R.id.descPaysVerti)
         val countryFlag: ImageView = view.findViewById(R.id.imagePaysVerti)
-        val favoriteButton: ImageButton = view.findViewById(R.id.favVerti)
-        val addButton: ImageButton = view.findViewById(R.id.AddPaysVerti)
+        override val favoriteButton: ImageButton = view.findViewById(R.id.favVerti)
+        override val addButton: ImageButton = view.findViewById(R.id.AddPaysVerti)
 
         val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(view.context))
-        fun addCountryToPlaylist(holder : CountryAdapter.CountryViewHolder, country: Country) {
-            // Retrieve all editable playlists
-            val editablePlaylists = playlistManager.getEditablePlaylists()
 
-            // Convert the playlists to an array of strings for the dialog
-            val playlistNames = editablePlaylists.map { it.nom }.toTypedArray()
-
-            // Create a new AlertDialog Builder
-            val builder = androidx.appcompat.app.AlertDialog.Builder(holder.itemView.context)
-            builder.setTitle("Sélectionner une playlist")
-
-            // Set the items and their click listener
-            builder.setItems(playlistNames) { _, which ->
-                // The 'which' argument contains the index position
-                // of the selected item
-                val selectedPlaylist = editablePlaylists[which]
-                playlistManager.addCountryToPlaylist(selectedPlaylist.nom, country.name.common)
-                Toast.makeText(holder.itemView.context, "${country.name.common} added to ${selectedPlaylist.nom}", Toast.LENGTH_SHORT).show()
-            }
-
-            // Create and show the AlertDialog
-            val dialog = builder.create()
-            dialog.show()
-        }
 
         init {
             view.setOnClickListener {
@@ -97,24 +74,12 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
         val playlistManager: PlaylistManager = PlaylistManager.getInstance(SharedPrefManager(holder.itemView.context))
 
         var countryIsFavorite = playlistManager.isCountryFavorite(country.name.common)
-        var favoriteColorChoice = if(countryIsFavorite) R.color.favorite_color else R.color.black
+        val colorChoice = if (countryIsFavorite) R.color.favorite_color else R.color.black
+        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, colorChoice))
 
-        holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, favoriteColorChoice))
+        CommonCountryAdapter.handleFavoriteButton(holder, country, playlistManager, holder.itemView.context)
+
         holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
-
-        holder.favoriteButton.setOnClickListener {
-            // Change the color of the favorite button
-            countryIsFavorite = !countryIsFavorite
-            favoriteColorChoice = if(countryIsFavorite) R.color.favorite_color else R.color.black
-            holder.favoriteButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, favoriteColorChoice))
-            if (countryIsFavorite) {
-                Log.d(TAG, "Adding ${country.name.common} to favorites")
-                playlistManager.addCountryToFavorites(country.name.common)
-            } else {
-                playlistManager.removeCountryFromFavorites(country.name.common)
-                Log.d(TAG, "Removing ${country.name.common} from favorites")
-            }
-        }
 
         holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.black))
 
@@ -122,7 +87,7 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.purple_200))
-                    holder.addCountryToPlaylist(holder, country)
+                    CommonCountryAdapter.addCountryToPlaylist(holder, country, playlistManager, holder.itemView.context)
                     true
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
@@ -131,31 +96,6 @@ class CountryAdapter(private val countries: List<Country>) : RecyclerView.Adapte
                 }
                 else -> false
             }
-        }
-
-        holder.addButton.setOnClickListener {
-            // Retrieve all editable playlists
-            val editablePlaylists = playlistManager.getEditablePlaylists()
-
-            // Convert the playlists to an array of strings for the dialog
-            val playlistNames = editablePlaylists.map { it.nom }.toTypedArray()
-
-            // Create a new AlertDialog Builder
-            val builder = AlertDialog.Builder(holder.itemView.context)
-            builder.setTitle("Sélectionner une playlist")
-
-            // Set the items and their click listener
-            builder.setItems(playlistNames) { _, which ->
-                // The 'which' argument contains the index position
-                // of the selected item
-                val selectedPlaylist = editablePlaylists[which]
-                playlistManager.addCountryToPlaylist(selectedPlaylist.nom, country.name.common)
-                Toast.makeText(holder.itemView.context, "${country.name.common} added to ${selectedPlaylist.nom}", Toast.LENGTH_SHORT).show()
-            }
-
-            // Create and show the AlertDialog
-            val dialog = builder.create()
-            dialog.show()
         }
     }
 

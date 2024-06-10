@@ -20,10 +20,10 @@ import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.save.model.toCountryString
 import fr.epf.min2.countries_app.ui.adapter.CountryAdapter
+import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
 
 
-
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(),CountryPlaylistAdapter.OnDeleteButtonClickListener  {
 
     private val TAG : String = "SearchFragment"
     private var _binding: FragmentSearchBinding? = null
@@ -53,7 +53,7 @@ class SearchFragment : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(context)
 
             // Initialize CountryAdapter
-            val adapter = CountryAdapter(countriesList)
+            val adapter = CountryAdapter(countriesList, this)
             recyclerView.adapter = adapter
 
         }
@@ -139,6 +139,10 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDeleteButtonClick() {
+        TODO("Not yet implemented")
     }
 
 

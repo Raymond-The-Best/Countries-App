@@ -13,7 +13,7 @@ data class Country(
     @SerializedName("capital") val capital: List<String>,
     @SerializedName("altSpellings") val altSpellings: List<String>,
     @SerializedName("region") val region: String,
-    @SerializedName("subregion") val subregion: String,
+    @SerializedName("subregion") val subregion: String?,
     @SerializedName("languages") val languages: Map<String, String>,
     @SerializedName("translations") val translations: Map<String, Translation>,
     @SerializedName("demonyms") val demonyms: Map<String, Demonym>,

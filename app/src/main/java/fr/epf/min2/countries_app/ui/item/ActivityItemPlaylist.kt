@@ -1,6 +1,7 @@
 package fr.epf.min2.countries_app.ui.item
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -13,7 +14,8 @@ import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.save.model.Country
 import fr.epf.min2.countries_app.ui.adapter.CountryAdapter
 import fr.epf.min2.countries_app.ui.adapter.CountryPlaylistAdapter
-class ActivityItemPlaylist : AppCompatActivity(), CountryPlaylistAdapter.OnDeleteButtonClickListener {
+private const val TAG = "ActivityItemPlaylist"
+class ActivityItemPlaylist : AppCompatActivity(), CountryPlaylistAdapter.OnDeleteButtonClickListener, CountryPlaylistAdapter.onFavoriteButtonClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_playlist)
@@ -26,7 +28,7 @@ class ActivityItemPlaylist : AppCompatActivity(), CountryPlaylistAdapter.OnDelet
 
         playlistNameTextView.text = playlistName
 
-        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!, this) }
+        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!, this, this) }
         countriesRecyclerView.layoutManager = LinearLayoutManager(this)
         countriesRecyclerView.adapter = adapter
 
@@ -39,6 +41,10 @@ class ActivityItemPlaylist : AppCompatActivity(), CountryPlaylistAdapter.OnDelet
     override fun onDeleteButtonClick() {
         val playlistName = intent.getStringExtra("PlaylistName")
         val playlistCountries = intent.getParcelableArrayListExtra<Country>("PlaylistCountries")
-        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!, this) }
+        val adapter = playlistName?.let { CountryPlaylistAdapter(it, playlistCountries!!, this, this) }
+    }
+    override fun onFavoriteButtonClick() {
+        Log.d(TAG, "Favorite button clicked")
+        onDeleteButtonClick()
     }
 }

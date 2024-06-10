@@ -42,12 +42,8 @@ class PlaylistAdapterHori (private val playlists: List<Playlist>) : RecyclerView
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val playlist = playlists[position]
-        /*holder.NomPlaylistHori.text = playlist.nom
-        val imageResource = holder.itemView.context.resources.getIdentifier(
-            playlist.image, "drawable", holder.itemView.context.packageName
-        )
-        holder.ImagePlaylistHori.setImageResource(imageResource)*/
         holder.ImagePlaylistHori.setImageResource(R.drawable.europe)
+        holder.NomPlaylistHori.text = playlist.nom
 
 
 

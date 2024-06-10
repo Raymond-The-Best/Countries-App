@@ -36,19 +36,25 @@ class CommonCountryAdapter {
         }
 
         fun addCountryToPlaylist(holder : CommonCountryAdapter.CountryViewHolder, country: Country, playlistManager: PlaylistManager, context: Context) {
-            holder.addButton.setOnClickListener {
+
+                Log.d(TAG, "Adding ${country.name.common} to a playlist")
                 // Retrieve all editable playlists
                 val editablePlaylists = playlistManager.getEditablePlaylists()
 
                 // Convert the playlists to an array of strings for the dialog
                 val playlistNames = editablePlaylists.map { it.nom }.toTypedArray()
 
-                // Create a new AlertDialog Builder
+                val editedNames = playlistNames.toMutableList().apply {
+                    remove(PlaylistManager.FAVORITES_NAME)
+                }.toTypedArray()
+
+
+            // Create a new AlertDialog Builder
                 val builder = androidx.appcompat.app.AlertDialog.Builder(context)
                 builder.setTitle("Sélectionner une playlist")
 
                 // Set the items and their click listener
-                builder.setItems(playlistNames) { _, which ->
+                builder.setItems(editedNames) { _, which ->
                     // The 'which' argument contains the index position
                     // of the selected item
                     val selectedPlaylist = editablePlaylists[which]
@@ -63,7 +69,7 @@ class CommonCountryAdapter {
                 // Create and show the AlertDialog
                 val dialog = builder.create()
                 dialog.show()
-            }
+
         }
     }
     interface CountryViewHolder  {

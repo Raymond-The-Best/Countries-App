@@ -1,6 +1,7 @@
 package fr.epf.min2.countries_app.ui.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -16,7 +17,7 @@ import fr.epf.min2.countries_app.ui.item.ActivityItemCountry
 import com.bumptech.glide.Glide
 import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SharedPrefManager
-
+private const val TAG = "CountryAdapterHori"
 class CountryAdapterHori(private val countries: MutableList<Country>, private val listener: CountryPlaylistAdapter.OnDeleteButtonClickListener) : RecyclerView.Adapter<CountryAdapterHori.CountryViewHolder>() {
 
     inner class CountryViewHolder(view: View)  : RecyclerView.ViewHolder(view), CommonCountryAdapter.CountryViewHolder {
@@ -76,6 +77,7 @@ class CountryAdapterHori(private val countries: MutableList<Country>, private va
         holder.addButton.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    Log.d(TAG, "Adding ${country.name.common} to a playlist")
                     holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.purple_200))
                     CommonCountryAdapter.addCountryToPlaylist(holder, country, playlistManager, holder.itemView.context)
                     true

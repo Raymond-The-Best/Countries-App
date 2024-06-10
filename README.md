@@ -40,5 +40,3 @@ Lorsqu'un pays est sélectionné dans la section "rechercher" ou dans une playli
 - une carte du monde, centrée sur sa capitale
 
 ![image](https://github.com/Raymond-The-Best/Countries-App/assets/160246745/bab434e3-a6d8-4682-aeb0-68563f41d8be)
-
-La fiche est également dotée de boutons pour ajouter/retirer le pays des favoris, et pour ajouter/retirer le pays d'une playlist.

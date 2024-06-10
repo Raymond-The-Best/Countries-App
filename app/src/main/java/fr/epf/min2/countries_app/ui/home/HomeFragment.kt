@@ -55,27 +55,27 @@ class HomeFragment : Fragment() {
         playlistRecyclerView.adapter = playlistAdapter
 
         val africaRecyclerView: RecyclerView = binding.recyclerAfrique
-        africaRecyclerView.layoutManager = LinearLayoutManager(context)
+        africaRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         africaRecyclerView.adapter = africaAdapter
 
         val americaRecyclerView: RecyclerView = binding.recyclerAmerique
-        americaRecyclerView.layoutManager = LinearLayoutManager(context)
+        americaRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         americaRecyclerView.adapter = americaAdapter
 
         val asiaRecyclerView: RecyclerView = binding.recyclerAsie
-        asiaRecyclerView.layoutManager = LinearLayoutManager(context)
+        asiaRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         asiaRecyclerView.adapter = asiaAdapter
 
         val europeRecyclerView: RecyclerView = binding.recyclerEurope
-        europeRecyclerView.layoutManager = LinearLayoutManager(context)
+        europeRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         europeRecyclerView.adapter = europeAdapter
 
         val oceaniaRecyclerView: RecyclerView = binding.recyclerOceanie
-        oceaniaRecyclerView.layoutManager = LinearLayoutManager(context)
+        oceaniaRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         oceaniaRecyclerView.adapter = oceaniaAdapter
 
         val antarticaRecyclerView: RecyclerView = binding.recyclerAntarctique
-        antarticaRecyclerView.layoutManager = LinearLayoutManager(context)
+        antarticaRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         antarticaRecyclerView.adapter = antarticaAdapter
 
         val sharedPrefManager = SharedPrefManager(requireContext())

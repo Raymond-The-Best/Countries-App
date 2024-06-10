@@ -70,18 +70,20 @@ class PlaylistsFragment : Fragment() {
             // Create an EditText
             val editText = EditText(context).apply {
                 inputType = InputType.TYPE_CLASS_TEXT
-                hint = "Enter playlist name"
+                hint = "Nom playlist"
             }
             val playlistManager : PlaylistManager = PlaylistManager.getInstance(sharedPrefManager)
             // Create an AlertDialog
             val dialog = AlertDialog.Builder(requireContext())
-                .setTitle("New Playlist")
-                .setMessage("Enter the name of the new playlist")
+                .setTitle("Nouvelle Playlist")
+                .setMessage("Entez le nom de la playlist")
                 .setView(editText)
                 .setPositiveButton("Add") { _, _ ->
                     val playlistName = editText.text.toString()
                     // Use the playlistName here to create a new playlist
                     playlistManager.createPlaylist(playlistName)
+                    // Update the RecyclerView
+                    playlistsViewModel.triggerPlaylistsUpdate(sharedPrefManager)
                 }
                 .setNegativeButton("Cancel", null)
                 .create()

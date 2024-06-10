@@ -39,13 +39,15 @@ class CountryAdapterHori(private val countries: MutableList<Country>, private va
                     intent.putExtra("COUNTRY_SUBREGION", clickedCountry.subregion)
                     intent.putExtra("COUNTRY_INDEPENDENT", clickedCountry.independent)
                     intent.putExtra("COUNTRY_UN_MEMBER", clickedCountry.unMember)
-                    intent.putExtra("COUNTRY_CURRENCY", clickedCountry.currencies.values?.joinToString { it.name })
-                    intent.putExtra("COUNTRY_LANGUAGE", clickedCountry.languages.values?.joinToString())
-                    intent.putExtra("COUNTRY_DEMONYM", clickedCountry.demonyms.values?.joinToString { it.male })
+                    if (clickedCountry.currencies != null) intent.putExtra("COUNTRY_CURRENCY", clickedCountry.currencies.values?.joinToString { it.name })
+                    if (clickedCountry.languages != null) intent.putExtra("COUNTRY_LANGUAGE", clickedCountry.languages.values?.joinToString())
+                    if (clickedCountry.demonyms != null) intent.putExtra("COUNTRY_DEMONYM", clickedCountry.demonyms.values?.joinToString { it.male })
                     intent.putExtra("COUNTRY_POPULATION", clickedCountry.population)
                     intent.putExtra("COUNTRY_DRIVES_ON", clickedCountry.car.side)
-                    intent.putExtra("COUNTRY_LAT", clickedCountry.capitalInfo.latlng[0])
-                    intent.putExtra("COUNTRY_LNG", clickedCountry.capitalInfo.latlng[1])
+                    if (clickedCountry.capitalInfo.latlng != null) {
+                        intent.putExtra("COUNTRY_LAT", clickedCountry.capitalInfo.latlng[0])
+                        intent.putExtra("COUNTRY_LNG", clickedCountry.capitalInfo.latlng[1])
+                    }
                     view.context.startActivity(intent)
                 }
             }
@@ -79,7 +81,8 @@ class CountryAdapterHori(private val countries: MutableList<Country>, private va
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(TAG, "Adding ${country.name.common} to a playlist")
                     holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.purple_200))
-                    CommonCountryAdapter.addCountryToPlaylist(holder, country, playlistManager, holder.itemView.context)
+                    var editablePlaylists = playlistManager.getEditablePlaylists()
+                    CommonCountryAdapter.addCountryToPlaylist(holder, country, playlistManager, holder.itemView.context, editablePlaylists)
                     true
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {

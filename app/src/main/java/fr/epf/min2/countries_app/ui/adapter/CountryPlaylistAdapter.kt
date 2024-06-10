@@ -121,7 +121,8 @@ class CountryPlaylistAdapter(private val playlistName : String, private val coun
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     holder.addButton.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.purple_200))
-                    CommonCountryAdapter.addCountryToPlaylist(holder, country, playlistManager, holder.itemView.context)
+                    var editablePlaylists = playlistManager.getEditablePlaylists()
+                    CommonCountryAdapter.addCountryToPlaylist(holder, country, playlistManager, holder.itemView.context, editablePlaylists)
                     true
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {

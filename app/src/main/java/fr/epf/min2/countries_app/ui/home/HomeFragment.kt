@@ -98,8 +98,8 @@ class HomeFragment : Fragment(),  CountryPlaylistAdapter.OnDeleteButtonClickList
             val asianCountries = countries["Asia"] ?: emptyList()
             val europeanCountries = countries["Europe"] ?: emptyList()
             val oceaniaCountries = countries["Oceania"] ?: emptyList()
-            val antarcticaCountryNames = listOf("Terre australes et antarctiques", "Antarctique", "Île Bouvet", "Îles Heard-et-MacDonald", "Géorgie du Sud-et-les Îles Sandwich du Sud")
-            val antarcticaCountries = antarcticaCountryNames.map { SavedDataLoader.getInstance().lookupByName(it) }.filterNotNull()
+            //val antarcticaCountryNames = listOf("Terre australes et antarctiques", "Antarctique", "Île Bouvet", "Îles Heard-et-MacDonald", "Géorgie du Sud-et-les Îles Sandwich du Sud")
+            val antarcticaCountries = countries["Antarctic"] ?: emptyList() //antarcticaCountryNames.map { SavedDataLoader.getInstance().lookupByName(it) }.filterNotNull()
 
             africaAdapter.updateCountries(africanCountries)
             americaAdapter.updateCountries(americanCountries)

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.model.Country
+import fr.epf.min2.countries_app.save.model.Playlist
+
 private const val TAG = "CommonCountryAdapter"
 class CommonCountryAdapter {
     companion object {
@@ -35,11 +37,9 @@ class CommonCountryAdapter {
             }
         }
 
-        fun addCountryToPlaylist(holder : CommonCountryAdapter.CountryViewHolder, country: Country, playlistManager: PlaylistManager, context: Context) {
+        fun addCountryToPlaylist(holder : CommonCountryAdapter.CountryViewHolder, country: Country, playlistManager: PlaylistManager, context: Context, editablePlaylists : List<Playlist>) {
 
                 Log.d(TAG, "Adding ${country.name.common} to a playlist")
-                // Retrieve all editable playlists
-                val editablePlaylists = playlistManager.getEditablePlaylists()
 
                 // Convert the playlists to an array of strings for the dialog
                 val playlistNames = editablePlaylists.map { it.nom }.toTypedArray()
@@ -48,6 +48,7 @@ class CommonCountryAdapter {
                     remove(PlaylistManager.FAVORITES_NAME)
                 }.toTypedArray()
 
+            val editedPlaylists = editablePlaylists.filter { it.nom != PlaylistManager.FAVORITES_NAME }
 
             // Create a new AlertDialog Builder
                 val builder = androidx.appcompat.app.AlertDialog.Builder(context)
@@ -57,7 +58,7 @@ class CommonCountryAdapter {
                 builder.setItems(editedNames) { _, which ->
                     // The 'which' argument contains the index position
                     // of the selected item
-                    val selectedPlaylist = editablePlaylists[which]
+                    val selectedPlaylist = editedPlaylists[which]
                     playlistManager.addCountryToPlaylist(selectedPlaylist.nom, country.name.common)
                     Toast.makeText(
                         context,

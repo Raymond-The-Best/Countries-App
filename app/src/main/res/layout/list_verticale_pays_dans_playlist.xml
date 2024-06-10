@@ -11,31 +11,31 @@
         android:id="@+id/nompaysplay"
         android:layout_width="253dp"
         android:layout_height="22dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
         android:text="PAYS"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="90dp" />
-
+        app:layout_constraintBottom_toTopOf="@+id/continentpaysplay"
+        app:layout_constraintEnd_toStartOf="@+id/favpaysplay"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/continentpaysplay"
         android:layout_width="246dp"
         android:layout_height="27dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
         android:text="Description"
-        app:layout_constraintTop_toBottomOf="@+id/nompaysplay"
-        tools:layout_editor_absoluteX="90dp" />
+        app:layout_constraintEnd_toStartOf="@+id/addpaysplay"
+        app:layout_constraintTop_toBottomOf="@+id/nompaysplay" />
 
     <ImageView
         android:id="@+id/imagePaysPlay"
         android:layout_width="78dp"
         android:layout_height="74dp"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/fr" />
-
 
     <ImageButton
         android:id="@+id/favpaysplay"

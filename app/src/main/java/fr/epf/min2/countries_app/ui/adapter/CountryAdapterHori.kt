@@ -18,11 +18,10 @@ import com.bumptech.glide.Glide
 class CountryAdapterHori(private val countries: MutableList<Country>) : RecyclerView.Adapter<CountryAdapterHori.CountryViewHolder>() {
 
     inner class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val countryName: TextView = view.findViewById(R.id.nomPaysVerti)
-        val countryRegion : TextView = view.findViewById(R.id.descPaysVerti)
-        val countryFlag: ImageView = view.findViewById(R.id.imagePaysVerti)
-        val favoriteButton: ImageButton = view.findViewById(R.id.favVerti)
-        val addButton: ImageButton = view.findViewById(R.id.AddPaysVerti)
+        val countryName: TextView = view.findViewById(R.id.nomPaysHori)
+        val countryFlag: ImageView = view.findViewById(R.id.imagePaysHori)
+        val favoriteButton: ImageButton = view.findViewById(R.id.buttonFavHori)
+        val addButton: ImageButton = view.findViewById(R.id.addPaysHori)
 
 
 
@@ -54,14 +53,13 @@ class CountryAdapterHori(private val countries: MutableList<Country>) : Recycler
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_verticale_pays, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_horizontale_pays, parent, false)
         return CountryViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
         val country = countries[position]
         holder.countryName.text = country.name.common
-        holder.countryRegion.text = country.region
         Glide.with(holder.itemView.context).load(country.flags.png).into(holder.countryFlag)
 
 

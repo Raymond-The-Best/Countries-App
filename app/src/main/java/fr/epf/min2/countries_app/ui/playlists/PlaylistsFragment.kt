@@ -1,15 +1,21 @@
 package fr.epf.min2.countries_app.ui.playlists
 
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import fr.epf.min2.countries_app.databinding.FragmentPlaylistsBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import fr.epf.min2.countries_app.R
+import fr.epf.min2.countries_app.save.PlaylistManager
 import fr.epf.min2.countries_app.save.SharedPrefManager
 import fr.epf.min2.countries_app.ui.adapter.PlaylistAdapter
 
@@ -56,6 +62,31 @@ class PlaylistsFragment : Fragment() {
             }
             binding.affichPlaylist.layoutManager = LinearLayoutManager(context)
             binding.affichPlaylist.adapter = PlaylistAdapter(playlists.toMutableList())
+        }
+
+        val ajouterNvllePlaylist: ImageButton = view.findViewById(R.id.ajouterNvllePlaylist)
+
+        ajouterNvllePlaylist.setOnClickListener {
+            // Create an EditText
+            val editText = EditText(context).apply {
+                inputType = InputType.TYPE_CLASS_TEXT
+                hint = "Enter playlist name"
+            }
+            val playlistManager : PlaylistManager = PlaylistManager.getInstance(sharedPrefManager)
+            // Create an AlertDialog
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle("New Playlist")
+                .setMessage("Enter the name of the new playlist")
+                .setView(editText)
+                .setPositiveButton("Add") { _, _ ->
+                    val playlistName = editText.text.toString()
+                    // Use the playlistName here to create a new playlist
+                    playlistManager.createPlaylist(playlistName)
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+
+            dialog.show()
         }
     }
 

@@ -3,6 +3,7 @@ package fr.epf.min2.countries_app.save
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import fr.epf.min2.countries_app.R
 import fr.epf.min2.countries_app.save.model.Playlist
 import java.util.Date
 
@@ -105,6 +106,11 @@ class PlaylistManager private constructor(private val sharedPrefManager: SharedP
 
     fun getEditablePlaylists(): List<Playlist> {
         return localPlaylistsVar.filter { it.isEditable }
+    }
+
+    fun createPlaylist(playlistName: String) {
+        val newPlaylist = Playlist(playlistName, Date(), mutableSetOf(), false, true, true, R.drawable.europe)
+        savePlaylist(newPlaylist)
     }
 
 }

@@ -33,7 +33,7 @@
         tools:listitem="@layout/list_verticale_playlist" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/ajouterNvllePlaylist"
         android:layout_width="53dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
